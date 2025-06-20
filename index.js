@@ -15,10 +15,14 @@ const {
     ActionRowBuilder,
     ButtonBuilder,
     ButtonStyle,
-    AuditLogEvent
+    AuditLogEvent,
+    Events
 } = require('discord.js');
 
 const noblox = require('noblox.js');
+
+// Suppress Noblox deprecation warnings globally
+noblox.setOptions({ show_deprecation_warnings: false });
 
 const xpManager = require('./xpManager');
 const permManager = require('./utils/permManager');
@@ -50,32 +54,36 @@ const client = new Client({
 const antiRaid = new AntiRaidManager(client);
 // -------------------- End Anti-Raid Manager --------------------
 
-// ID del canale dove inviare notifiche di guildCreate (opzionale)
+// ID of channel where to notify bot added to new guild (optional)
 const notifyChannelId = process.env.NOTIFY_CHANNEL_ID;
 
 // -------------------- Roblox login --------------------
 async function loginRoblox() {
     try {
         if (!process.env.ROBLOX_COOKIE) {
-            console.warn('ROBLOX_COOKIE non impostato');
+            console.warn('ROBLOX_COOKIE not set');
             return;
         }
+        // Set cookie for Noblox
         await noblox.setCookie(process.env.ROBLOX_COOKIE);
         console.log('Roblox login successful');
-        // Recupera l'ID dell'utente autenticato con la cookie
-        try {
-            const currentUser = await noblox.getCurrentUser();
-            client.robloxUserId = currentUser; // sarà un number
-            console.log(`Bot Roblox user ID: ${client.robloxUserId}`);
-        } catch (err) {
-            console.error('Impossibile ottenere l’ID utente Roblox dopo il login:', err);
+
+        // Get authenticated user info
+        const botUser = await noblox.getAuthenticatedUser();
+        console.log('Roblox getAuthenticatedUser returned:', botUser);
+        const botUserId = botUser.id ?? botUser.UserID;
+        if (botUserId) {
+            client.robloxUserId = botUserId;
+            console.log(`Bot Roblox user ID: ${botUserId}`);
+        } else {
+            console.warn('Could not determine Roblox bot user ID from getAuthenticatedUser():', botUser);
         }
     } catch (err) {
         console.error('Roblox login failed:', err);
     }
 }
 
-// -------------------- Helpers per log channels --------------------
+// -------------------- Helpers for log channels --------------------
 async function getLogChannel(guild, settingKey) {
     if (!guild) return null;
     try {
@@ -87,7 +95,7 @@ async function getLogChannel(guild, settingKey) {
         const botMember = guild.members.me || await guild.members.fetchMe();
         const perms = channel.permissionsFor(botMember);
         if (!perms || !perms.has(['ViewChannel', 'SendMessages', 'EmbedLinks'])) {
-            console.warn(`[getLogChannel] Missing perms in ${channelId} for guild ${guild.id}`);
+            console.warn(`[getLogChannel] Missing perms in channel ${channelId} for guild ${guild.id}`);
             return null;
         }
         return channel;
@@ -199,17 +207,17 @@ client.once('ready', async () => {
     console.log(`Logged in as ${client.user.tag}`);
     await loginRoblox();
 
-    // Inizializza tabelle se vuoi
+    // Initialize DB tables if needed
     try {
         await initDatabase();
     } catch (err) {
-        console.error('Errore initDatabase:', err);
+        console.error('Error in initDatabase:', err);
     }
 
-    // Sync XP ogni 15 minuti (esempio)
+    // Example: sync XP every 15 minutes
     setInterval(async () => {
-        // xp sync logic...
         console.log('Sync XP (stub)');
+        // your xp sync logic here...
     }, 15 * 60 * 1000);
 });
 
@@ -254,13 +262,13 @@ client.on('guildCreate', async (guild) => {
                 console.error('Failed to send notify embed to channel:', err);
             }
         } else {
-            console.warn('NOTIFY_CHANNEL_ID non impostato in .env');
+            console.warn('NOTIFY_CHANNEL_ID not set in .env');
         }
     } catch (err) {
         console.error('Error sending notify in guildCreate:', err);
     }
 
-    // setup DM to guild owner
+    // DM setup instructions to guild owner
     try {
         const ownerMember = await guild.fetchOwner();
         const ownerUser = ownerMember.user;
@@ -270,25 +278,25 @@ client.on('guildCreate', async (guild) => {
         }
 
         const setupMessage = `
-📌 **How to set up Clarivex Bot**
+📌 **How to set up the Bot**
 
-1️⃣ If you haven't verified yet, use \`/verify\` to link your **Roblox account** to your **Discord account**.
+1️⃣ If you haven't verified yet, use \`/verify\` to link your Roblox account to your Discord account.
 
-2️⃣ Then use \`/setup\` and enter your **Group ID** (found in your Roblox group link) to connect your **Roblox group** to your **Discord server**.
+2️⃣ Then use \`/setup\` and enter your **Group ID** (found in your Roblox group link) to connect your Roblox group to your Discord server.
 
-✅ Done! Now you can use many features like:
+✅ Done! Now you can use features like:
 - \`/profile\` → Check account info
 - \`/warns add\` → Give warnings
 - \`/warns\` → View warnings
 - \`/medal create\` → Create medals
 - \`/setwelcomelogs enable\` → Enable welcome logs
-- Set logs for deleted/edited messages, joins/leaves, and more!
+- Logs for deleted/edited messages, joins/leaves, and more!
 
 🛠️ Start managing your community!
 `.trim();
 
         await ownerUser.send({
-            content: `📥 **Clarivex Bot joined your server**\nServer: **${guild.name}** (ID: ${guild.id})\n\n${setupMessage}`
+            content: `📥 **Bot joined your server**\nServer: **${guild.name}** (ID: ${guild.id})\n\n${setupMessage}`
         });
         console.log(`Sent setup instructions to ${ownerUser.tag} for server ${guild.name}`);
     } catch (err) {
@@ -322,26 +330,26 @@ client.on('guildMemberAdd', async member => {
             embed
                 .setAuthor({ name: member.user.tag, iconURL: member.user.displayAvatarURL({ dynamic: true, size: 64 }) })
                 .setTitle('👑 Welcome, Premium Member!')
-                .setDescription(messageText || 'Benvenuto!')
+                .setDescription(messageText || 'Welcome!')
                 .setColor('Gold')
                 .addFields(
                     {
-                        name: '📅 Account Created',
+                        name: 'Account Created',
                         value: `<t:${createdTimestampSec}:D> (<t:${createdTimestampSec}:R>)`,
                         inline: true
                     },
                     {
-                        name: '🔢 Member Number',
+                        name: 'Member Number',
                         value: `#${member.guild.memberCount}`,
                         inline: true
                     },
                     {
-                        name: '⏱ Joined At',
+                        name: 'Joined At',
                         value: `<t:${joinTimestampSec}:T> (<t:${joinTimestampSec}:R>)`,
                         inline: true
                     },
                     {
-                        name: '🎉 Premium Perks',
+                        name: 'Premium Perks',
                         value: 'Thank you for being a premium user! Enjoy exclusive perks.',
                         inline: false
                     }
@@ -357,21 +365,21 @@ client.on('guildMemberAdd', async member => {
             embed
                 .setAuthor({ name: member.guild.name, iconURL: member.guild.iconURL({ dynamic: true, size: 64 }) || undefined })
                 .setTitle('👋 Welcome!')
-                .setDescription(messageText || 'Benvenuto!')
+                .setDescription(messageText || 'Welcome!')
                 .setColor('#00BFFF')
                 .addFields(
                     {
-                        name: '📅 Account Created',
+                        name: 'Account Created',
                         value: `<t:${createdTimestampSec}:D> (<t:${createdTimestampSec}:R>)`,
                         inline: true
                     },
                     {
-                        name: '🔢 Member Number',
+                        name: 'Member Number',
                         value: `#${member.guild.memberCount}`,
                         inline: true
                     },
                     {
-                        name: '⏱ Joined At',
+                        name: 'Joined At',
                         value: `<t:${joinTimestampSec}:T> (<t:${joinTimestampSec}:R>)`,
                         inline: true
                     }
@@ -625,10 +633,9 @@ client.on('interactionCreate', async interaction => {
         }
         else if (interaction.isButton()) {
             try {
-                // Qui invochiamo il nostro handler custom
                 const handler = require('./events/interactionCreate');
                 if (handler && typeof handler.execute === 'function') {
-                    await handler.execute(interaction, client);
+                    await handler.execute(interaction);
                 }
             } catch (err) {
                 console.error('Button interaction error:', err);
@@ -647,7 +654,7 @@ app.use(bodyParser.json());
 
 // -------------------- Start Bot --------------------
 if (!process.env.DISCORD_TOKEN) {
-    console.error('DISCORD_TOKEN non impostato');
+    console.error('DISCORD_TOKEN not set');
     process.exit(1);
 }
 client.login(process.env.DISCORD_TOKEN);
