@@ -28,14 +28,7 @@ module.exports = {
                 .setRequired(false)
         ),
 
-    /**
-     * Executes the /setup command:
-     * 1. Validates inputs and ownership.
-     * 2. Saves pending setup in DB under guildId.
-     * 3. Sends a “Confirm Bot Is In Group” button to the pending channel.
-     */
     async execute(interaction) {
-        // Defer reply so user sees ephemeral response
         await interaction.deferReply({ ephemeral: true });
 
         const guildId = interaction.guild.id;
@@ -46,7 +39,7 @@ module.exports = {
 
         console.log(`[Setup] Invoked by user ${userId} in guild ${guildId}, groupId=${groupId}`);
 
-        // 1) Check if this Roblox group is already configured in another guild
+        // 1) Already configured elsewhere?
         let otherGuild;
         try {
             otherGuild = await setupManager.findGuildByGroupId(groupId);
@@ -65,7 +58,7 @@ module.exports = {
             });
         }
 
-        // 2) Check if there is a pending setup elsewhere for this group
+        // 2) Pending elsewhere?
         let pendingElsewhere;
         try {
             pendingElsewhere = await setupManager.findPendingGuildByGroupId(groupId);
@@ -84,7 +77,7 @@ module.exports = {
             });
         }
 
-        // 3) Check if this server is already configured with a group
+        // 3) This server already configured?
         let existingConfig;
         try {
             existingConfig = await setupManager.getConfig(guildId);
@@ -109,7 +102,7 @@ module.exports = {
             }
         }
 
-        // 4) Check if there is a pending setup in this server already
+        // 4) Pending in this server?
         let existingPending;
         try {
             existingPending = await setupManager.getPendingSetup(guildId);
@@ -134,7 +127,7 @@ module.exports = {
             }
         }
 
-        // 5) Fetch Roblox group info & verify ownership
+        // 5) Fetch Roblox group & verify ownership
         let groupInfo;
         try {
             groupInfo = await noblox.getGroup(parseInt(groupId, 10));
@@ -200,7 +193,7 @@ module.exports = {
 
         // 9) Send the pending-request embed + button to the pending channel
         const confirmButton = new ButtonBuilder()
-            // Use the Discord guild ID here (NOT the Roblox group ID)
+            // <-- Use Discord guild ID here to build customId
             .setCustomId(`confirm_join_${guildId}`)
             .setLabel('✅ Confirm Bot Is In Group')
             .setStyle(ButtonStyle.Success);
