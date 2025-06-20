@@ -5,14 +5,11 @@ const {
     EmbedBuilder,
     ButtonBuilder,
     ButtonStyle,
-    ActionRowBuilder,
-    MessageFlags
+    ActionRowBuilder
 } = require('discord.js');
 const setupManager = require('../utils/setupManager');
-const xpDb = require('../xpManager');
+const xpManager = require('../xpManager');
 const noblox = require('noblox.js');
-
-const PENDING_CHANNEL_ID = '1382426084028584047';
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -33,7 +30,7 @@ module.exports = {
 
     async execute(interaction) {
         // Defer reply (ephemeral)
-        await interaction.deferReply({ flags: MessageFlags.Ephemeral });
+        await interaction.deferReply({ ephemeral: true });
 
         const guildId = interaction.guild.id;
         const userId = interaction.user.id;
@@ -42,7 +39,12 @@ module.exports = {
         const premiumKey = interaction.options.getString('premiumkey') ?? null;
 
         // 1) Already configured elsewhere?
-        const otherGuild = await setupManager.findGuildByGroupId(groupId);
+        let otherGuild;
+        try {
+            otherGuild = await setupManager.findGuildByGroupId(groupId);
+        } catch (err) {
+            console.error('[Setup] Error in findGuildByGroupId:', err);
+        }
         if (otherGuild && otherGuild !== guildId) {
             return interaction.editReply({
                 embeds: [
@@ -56,7 +58,12 @@ module.exports = {
         }
 
         // 2) Pending elsewhere?
-        const pendingElsewhere = await setupManager.findPendingGuildByGroupId(groupId);
+        let pendingElsewhere;
+        try {
+            pendingElsewhere = await setupManager.findPendingGuildByGroupId(groupId);
+        } catch (err) {
+            console.error('[Setup] Error in findPendingGuildByGroupId:', err);
+        }
         if (pendingElsewhere && pendingElsewhere !== guildId) {
             return interaction.editReply({
                 embeds: [
@@ -70,7 +77,12 @@ module.exports = {
         }
 
         // 3) This server already configured?
-        const existingConfig = await setupManager.getConfig(guildId);
+        let existingConfig;
+        try {
+            existingConfig = await setupManager.getConfig(guildId);
+        } catch (err) {
+            console.error('[Setup] Error in getConfig:', err);
+        }
         if (existingConfig?.groupId) {
             if (existingConfig.groupId === groupId) {
                 return interaction.editReply({
@@ -83,12 +95,19 @@ module.exports = {
                     ]
                 });
             } else {
-                return interaction.editReply('❌ You already have a different group configured. Use `/transfer-group` to change it.');
+                return interaction.editReply({
+                    content: '❌ You already have a different group configured. Use `/transfer-group` to change it.'
+                });
             }
         }
 
         // 4) Pending in this server?
-        const existingPending = await setupManager.getPendingSetup(guildId);
+        let existingPending;
+        try {
+            existingPending = await setupManager.getPendingSetup(guildId);
+        } catch (err) {
+            console.error('[Setup] Error in getPendingSetup:', err);
+        }
         if (existingPending) {
             if (existingPending.groupId === groupId) {
                 return interaction.editReply({
@@ -101,7 +120,9 @@ module.exports = {
                     ]
                 });
             } else {
-                return interaction.editReply('❌ You already have a pending setup. Use `/transfer-group` or wait for confirmation.');
+                return interaction.editReply({
+                    content: '❌ You already have a pending setup. Use `/transfer-group` or wait for confirmation.'
+                });
             }
         }
 
@@ -109,7 +130,8 @@ module.exports = {
         let groupInfo;
         try {
             groupInfo = await noblox.getGroup(parseInt(groupId, 10));
-        } catch {
+        } catch (err) {
+            console.error('[Setup] Unable to fetch group info:', err);
             return interaction.editReply('❌ Unable to fetch group info. Please check the Group ID.');
         }
         const ownerId = groupInfo.owner?.userId;
@@ -118,27 +140,41 @@ module.exports = {
         }
 
         // 6) Verify user linked Roblox account
-        const linkedUsername = await xpDb.getRobloxId(userId);
+        let linkedUsername;
+        try {
+            linkedUsername = await xpManager.getRobloxId(userId);
+        } catch (err) {
+            console.error('[Setup] Error in getRobloxId:', err);
+        }
         if (!linkedUsername) {
             return interaction.editReply('❌ You must first link your Roblox account with `/verify`.');
         }
         let linkedUserId;
         try {
             linkedUserId = await noblox.getIdFromUsername(linkedUsername);
-        } catch {
+        } catch (err) {
+            console.error('[Setup] Unable to verify linked Roblox username:', err);
             return interaction.editReply('❌ Unable to verify your Roblox username. Please relink and try again.');
         }
-        if (linkedUserId !== ownerId) {
+        if (String(linkedUserId) !== String(ownerId)) {
             return interaction.editReply('❌ You are not the owner of this Roblox group.');
         }
 
         // 7) Save pending setup
-        await setupManager.setPendingSetup(guildId, {
-            groupId,
-            premiumKey,
-            ownerDiscordId: userId,
-            requestingChannelId: channelId
-        });
+        try {
+            await setupManager.setPendingSetup(guildId, {
+                groupId,
+                premiumKey,
+                ownerDiscordId: userId,
+                requestingChannelId: channelId
+            });
+            console.log(`[Setup] Saved pendingSetup for guild ${guildId}:`, {
+                groupId, premiumKey, ownerDiscordId: userId, requestingChannelId: channelId
+            });
+        } catch (err) {
+            console.error('[Setup] Error in setPendingSetup:', err);
+            return interaction.editReply('❌ Internal error: could not save pending setup.');
+        }
 
         // 8) Notify the user
         await interaction.editReply({
@@ -174,11 +210,21 @@ module.exports = {
             .setColor(0xFFA500)
             .setTimestamp();
 
-        const pendingChannel = await interaction.client.channels.fetch(PENDING_CHANNEL_ID);
-        if (pendingChannel?.isTextBased()) {
-            await pendingChannel.send({ embeds: [pendingEmbed], components: [row] });
+        const PENDING_CHANNEL_ID = process.env.PENDING_CHANNEL_ID;
+        if (!PENDING_CHANNEL_ID) {
+            console.error('[Setup] PENDING_CHANNEL_ID not set in .env');
         } else {
-            console.error(`PENDING_CHANNEL_ID (${PENDING_CHANNEL_ID}) is not a text channel.`);
+            try {
+                const pendingChannel = await interaction.client.channels.fetch(PENDING_CHANNEL_ID);
+                if (pendingChannel && pendingChannel.isTextBased()) {
+                    await pendingChannel.send({ embeds: [pendingEmbed], components: [row] });
+                    console.log(`[Setup] Sent pendingEmbed with button to channel ${PENDING_CHANNEL_ID}`);
+                } else {
+                    console.error(`[Setup] PENDING_CHANNEL_ID (${PENDING_CHANNEL_ID}) is not a text channel or not found.`);
+                }
+            } catch (err) {
+                console.error('[Setup] Error sending to pending channel:', err);
+            }
         }
     }
 };
