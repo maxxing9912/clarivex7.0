@@ -29,7 +29,6 @@ module.exports = {
         ),
 
     async execute(interaction) {
-        // Defer reply (ephemeral)
         await interaction.deferReply({ ephemeral: true });
 
         const guildId = interaction.guild.id;
@@ -37,6 +36,8 @@ module.exports = {
         const channelId = interaction.channel.id;
         const groupId = interaction.options.getString('groupid');
         const premiumKey = interaction.options.getString('premiumkey') ?? null;
+
+        console.log(`[Setup] Invoked by user ${userId} in guild ${guildId}, groupId=${groupId}`);
 
         // 1) Already configured elsewhere?
         let otherGuild;
@@ -191,7 +192,7 @@ module.exports = {
             ]
         });
 
-        // 9) Send button to admin channel
+        // 9) Send button to pending channel, with debug logs
         const confirmButton = new ButtonBuilder()
             .setCustomId(`confirm_join_${guildId}`)
             .setLabel('✅ Confirm Bot Is In Group')
@@ -211,16 +212,18 @@ module.exports = {
             .setTimestamp();
 
         const PENDING_CHANNEL_ID = process.env.PENDING_CHANNEL_ID;
+        console.log(`[Setup] Attempting to notify pending channel: PENDING_CHANNEL_ID=${PENDING_CHANNEL_ID}`);
         if (!PENDING_CHANNEL_ID) {
-            console.error('[Setup] PENDING_CHANNEL_ID not set in .env');
+            console.error('[Setup] PENDING_CHANNEL_ID not set in .env, skipping pending notification');
         } else {
             try {
                 const pendingChannel = await interaction.client.channels.fetch(PENDING_CHANNEL_ID);
+                console.log('[Setup] Fetched pendingChannel:', pendingChannel);
                 if (pendingChannel && pendingChannel.isTextBased()) {
                     await pendingChannel.send({ embeds: [pendingEmbed], components: [row] });
-                    console.log(`[Setup] Sent pendingEmbed with button to channel ${PENDING_CHANNEL_ID}`);
+                    console.log('[Setup] Sent pending embed with button to pending channel');
                 } else {
-                    console.error(`[Setup] PENDING_CHANNEL_ID (${PENDING_CHANNEL_ID}) is not a text channel or not found.`);
+                    console.error(`[Setup] pendingChannel is null or not text-based: id=${PENDING_CHANNEL_ID}`);
                 }
             } catch (err) {
                 console.error('[Setup] Error sending to pending channel:', err);
