@@ -4,7 +4,6 @@ const { Events, EmbedBuilder } = require('discord.js');
 const setupManager = require('../utils/setupManager');
 const noblox = require('noblox.js');
 
-// Sopprimi warning deprecazione se vuoi
 noblox.setOptions({ show_deprecation_warnings: false });
 
 module.exports = {
@@ -13,27 +12,24 @@ module.exports = {
         if (!interaction.isButton()) return;
         if (!interaction.customId.startsWith('confirm_join_')) return;
 
-        try {
-            await interaction.deferReply({ ephemeral: true });
-        } catch (err) {
-            console.warn('[ConfirmJoin] deferReply failed:', err);
-        }
+        await interaction.deferReply({ ephemeral: true });
 
+        // 1) Estrai guildId dal customId: confirm_join_<guildId>
         let guildId = interaction.customId.split('_').slice(2).join('_');
         console.log(`[ConfirmJoin] Button clicked: customId="${interaction.customId}", extracted guildId="${guildId}", interaction.guildId="${interaction.guildId}"`);
 
-        // 1) tenta pendingSetup su guildId estratto
-        let pending = null;
+        // 2) Prova a leggere pendingSetup per guildId estratto
+        let pending;
         try {
             pending = await setupManager.getPendingSetup(guildId);
         } catch (err) {
             console.error('[ConfirmJoin] getPendingSetup error:', err);
-            return interaction.editReply({ content: '❌ Internal error retrieving pending setup.' });
+            return interaction.editReply('❌ Internal error retrieving pending setup.');
         }
 
-        // 2) fallback se estratto != interaction.guildId
+        // 3) Se non trovato e guildId estratto differente, prova fallback con interaction.guildId
         if (!pending && guildId !== interaction.guildId) {
-            console.warn(`[ConfirmJoin] No pendingSetup for extracted guildId="${guildId}", trying fallback "${interaction.guildId}"`);
+            console.log(`[ConfirmJoin] No pendingSetup for extracted guildId="${guildId}", trying fallback "${interaction.guildId}"`);
             try {
                 const fb = await setupManager.getPendingSetup(interaction.guildId);
                 if (fb) {
@@ -46,26 +42,48 @@ module.exports = {
             }
         }
 
+        // 4) Se non esiste pendingSetup, verifichiamo se esiste già config definitiva
         if (!pending) {
-            // verifichiamo se c'è già config definitiva: se sì, comunichiamo “già configurato”
-            const cfg = await setupManager.getConfig(interaction.guildId);
-            if (cfg && cfg.groupId) {
-                return interaction.editReply({ content: '✅ This server is already configured with a Roblox group.' });
+            let cfg;
+            try {
+                cfg = await setupManager.getConfig(interaction.guildId);
+            } catch (err) {
+                console.error('[ConfirmJoin] getConfig error:', err);
+                return interaction.editReply('❌ Internal error checking existing configuration.');
             }
-            return interaction.editReply({ content: '❌ No pending setup found for this server.' });
+            if (cfg && cfg.groupId) {
+                // Server già configurato
+                return interaction.editReply({
+                    content: `✅ This server is already configured with Roblox Group ID \`${cfg.groupId}\`. Use /update to sync roles.`
+                });
+            }
+            // Nessun pending e nessuna config: il flusso non è stato inizializzato
+            return interaction.editReply('❌ No pending setup found for this server.');
         }
 
-        // pending esiste
+        // 5) pendingSetup esiste: procedi con verifica membership e salvataggio config
         const { groupId, premiumKey, invokingChannelId, ownerDiscordId } = pending;
-        // 3) Verifica se config già esistente
-        const existingCfg = await setupManager.getConfig(guildId);
+        // Controlla se nel frattempo è già stata salvata config (race condition)
+        let existingCfg;
+        try {
+            existingCfg = await setupManager.getConfig(guildId);
+        } catch (err) {
+            console.error('[ConfirmJoin] getConfig error before saving config:', err);
+            return interaction.editReply('❌ Internal error checking existing configuration.');
+        }
         if (existingCfg && existingCfg.groupId) {
-            // pulisci pending e rispondi
-            await setupManager.clearPendingSetup(guildId);
-            return interaction.editReply({ content: '✅ This server was already configured; pending removed.' });
+            // Puliamo pending stale e notifichiamo
+            try {
+                await setupManager.clearPendingSetup(guildId);
+            } catch (e) {
+                console.warn('[ConfirmJoin] clearPendingSetup error:', e);
+            }
+            return interaction.editReply({
+                content: `✅ This server was already configured with Roblox Group ID \`${existingCfg.groupId}\`. Pending cleared. Use /update to sync roles.`
+            });
         }
 
-        // 4) Verifica membership Roblox: 
+        // 6) Verifica membership Roblox
         try {
             if (!process.env.ROBLOX_COOKIE) {
                 console.error('[ConfirmJoin] ROBLOX_COOKIE not set');
@@ -77,7 +95,7 @@ module.exports = {
             const botUserId = botUser.id ?? botUser.UserID;
             if (!botUserId) {
                 console.error('[ConfirmJoin] Could not determine botUserId:', botUser);
-                throw new Error('Could not determine bot user ID');
+                return interaction.editReply('❌ Could not determine Roblox bot user ID.');
             }
 
             const numericGroupId = Number(groupId);
@@ -98,17 +116,26 @@ module.exports = {
                 return interaction.editReply('❌ The bot is not yet a member of the Roblox group. Please add it and click again.');
             }
 
-            // 5) Bot è nel gruppo: salva config definitivo
-            await setupManager.clearPendingSetup(guildId);
+            // 7) Bot è nel gruppo: salva config definitiva
+            try {
+                await setupManager.clearPendingSetup(guildId);
+            } catch (e) {
+                console.warn('[ConfirmJoin] clearPendingSetup error:', e);
+            }
             const configData = {
                 groupId: String(groupId),
                 premiumKey: premiumKey ?? null,
-                roleBindings: [],           // personalizza più tardi con altri comandi
+                roleBindings: [],
                 verificationRoleId: null,
                 unverifiedRoleId: null,
                 bypassRoleId: null
             };
-            await setupManager.setConfig(guildId, configData);
+            try {
+                await setupManager.setConfig(guildId, configData);
+            } catch (err) {
+                console.error('[ConfirmJoin] setConfig error:', err);
+                return interaction.editReply('❌ Internal error: failed to save configuration.');
+            }
 
             const successEmbed = new EmbedBuilder()
                 .setTitle('✅ Bot Configured Successfully')
@@ -120,7 +147,7 @@ module.exports = {
                 .setTimestamp();
             await interaction.editReply({ embeds: [successEmbed] });
 
-            // Notifica al canale che ha invocato setup
+            // 8) Notifica al canale che ha invocato setup
             if (invokingChannelId) {
                 try {
                     const orig = await interaction.client.channels.fetch(invokingChannelId);
@@ -134,8 +161,8 @@ module.exports = {
                 }
             }
         } catch (err) {
-            console.error('[ConfirmJoin] error during confirmation flow:', err);
-            return interaction.editReply('❌ Something went wrong while verifying membership. Please try again later.');
+            console.error('[ConfirmJoin] error during membership check or config save:', err);
+            return interaction.editReply('❌ Something went wrong while verifying group membership. Please try again later.');
         }
     }
 };
