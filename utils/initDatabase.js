@@ -115,7 +115,7 @@ async function initDatabase() {
         data     JSONB NOT NULL
       );
     `);
-        // anti-raid
+        // anti-raid (if used)
         await db.query(`
       CREATE TABLE IF NOT EXISTS anti_raid_configs (
         guild_id TEXT PRIMARY KEY,
@@ -131,7 +131,7 @@ async function initDatabase() {
       );
     `);
         await db.query(`CREATE INDEX IF NOT EXISTS idx_anti_raid_joins_guild_ts ON anti_raid_joins(guild_id, ts);`);
-        // backups
+        // backups (if used)
         await db.query(`
       CREATE TABLE IF NOT EXISTS backups (
         guild_id TEXT NOT NULL,
@@ -140,7 +140,7 @@ async function initDatabase() {
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       );
     `);
-        // permManager tables
+        // permManager tables (if used)
         await db.query(`
       CREATE TABLE IF NOT EXISTS guild_owners (
         guild_id TEXT PRIMARY KEY,
