@@ -1,4 +1,4 @@
-﻿require('dotenv').config();
+require('dotenv').config();
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -62,6 +62,14 @@ async function loginRoblox() {
         }
         await noblox.setCookie(process.env.ROBLOX_COOKIE);
         console.log('Roblox login successful');
+        // Recupera l'ID dell'utente autenticato con la cookie
+        try {
+            const currentUser = await noblox.getCurrentUser();
+            client.robloxUserId = currentUser; // sarà un number
+            console.log(`Bot Roblox user ID: ${client.robloxUserId}`);
+        } catch (err) {
+            console.error('Impossibile ottenere l’ID utente Roblox dopo il login:', err);
+        }
     } catch (err) {
         console.error('Roblox login failed:', err);
     }
@@ -617,9 +625,10 @@ client.on('interactionCreate', async interaction => {
         }
         else if (interaction.isButton()) {
             try {
+                // Qui invochiamo il nostro handler custom
                 const handler = require('./events/interactionCreate');
                 if (handler && typeof handler.execute === 'function') {
-                    await handler.execute(interaction);
+                    await handler.execute(interaction, client);
                 }
             } catch (err) {
                 console.error('Button interaction error:', err);
