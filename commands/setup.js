@@ -5,8 +5,7 @@ const {
     EmbedBuilder,
     ButtonBuilder,
     ButtonStyle,
-    ActionRowBuilder,
-    MessageFlags
+    ActionRowBuilder
 } = require('discord.js');
 const setupManager = require('../utils/setupManager');
 const xpDb = require('../xpManager');
@@ -45,12 +44,10 @@ module.exports = {
             existingCfg = await setupManager.getConfig(guildId);
         } catch (err) {
             console.error('[setup] Error in getConfig:', err);
-            // se errore DB, puoi decidere di bloccare o proseguire; qui blocchiamo con messaggio generico
             return interaction.editReply('❌ Internal error while checking existing configuration.');
         }
         if (existingCfg && existingCfg.groupId) {
             if (String(existingCfg.groupId) === String(groupId)) {
-                // Stesso groupId: già configurato con questo gruppo
                 return interaction.editReply({
                     embeds: [
                         new EmbedBuilder()
@@ -64,7 +61,6 @@ module.exports = {
                     ]
                 });
             } else {
-                // Configurato con un altro group
                 return interaction.editReply({
                     embeds: [
                         new EmbedBuilder()
@@ -126,7 +122,6 @@ module.exports = {
         }
 
         // 3) Verifica ownership Roblox e salva pending setup
-        //    (il resto del flusso rimane identico: fetch groupInfo, verify linked account, ecc.)
         let groupInfo;
         try {
             groupInfo = await noblox.getGroup(parseInt(groupId, 10));
