@@ -13,12 +13,13 @@ function parseJSON(value, fallback) {
 module.exports = {
     // Main config
     async getConfig(guildId) {
-        // console.log(`[setupManager] getConfig for guild ${guildId}`);
+        console.log(`[setupManager] getConfig for guild ${guildId}`);
         const res = await db.query(
             `SELECT data FROM configs WHERE guild_id = $1`,
             [guildId]
         );
         if (res.rowCount === 0) {
+            console.log(`[setupManager] getConfig: none for guild ${guildId}, returning default`);
             return {
                 groupId: null,
                 premiumKey: null,
@@ -28,11 +29,13 @@ module.exports = {
                 bypassRoleId: null
             };
         }
-        return parseJSON(res.rows[0].data, {});
+        const parsed = parseJSON(res.rows[0].data, {});
+        console.log(`[setupManager] getConfig: returning`, parsed);
+        return parsed;
     },
 
     async setConfig(guildId, config) {
-        // console.log(`[setupManager] setConfig for guild ${guildId}:`, config);
+        console.log(`[setupManager] setConfig for guild ${guildId}:`, config);
         // clear any pending on write
         await this.clearPendingSetup(guildId);
         await this.clearPendingTransfer(guildId);
