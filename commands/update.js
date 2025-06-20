@@ -1,203 +1,180 @@
-﻿// commands/update.js
-const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const noblox = require("noblox.js");
-const setupManager = require("../utils/setupManager");
-const xpDb = require("../xpManager");
-const fs = require("fs").promises;
-const path = require("path");
+// commands/update.js
 
-const premiumUsersFile = path.resolve(process.cwd(), "premiumUsers.json");
-
-// Role IDs from env
-const ROLE_IDS = {
-    monthly: process.env.DISCORD_PREMIUM_ROLE_ID,                           // e.g. "123456789012345678"
-    annual: process.env.DISCORD_PREMIUM_ROLE_ID,                           // reuse same or separate if you want
-    lifetime: [
-        process.env.DISCORD_LIFETIME_ROLE_ID,       // e.g. "234567890123456789"
-        process.env.DISCORD_EARLY_ACCESS_ROLE_ID    // e.g. "345678901234567890"
-    ].filter(Boolean)
-};
-
-async function loadSubscriptions() {
-    try {
-        const data = await fs.readFile(premiumUsersFile, "utf8");
-        return JSON.parse(data).subscriptions || {};
-    } catch {
-        return {};
-    }
-}
-
-async function saveSubscriptions(subscriptions) {
-    await fs.writeFile(premiumUsersFile, JSON.stringify({ subscriptions }, null, 2), "utf8");
-}
-
-async function isPremium(discordId) {
-    const subs = await loadSubscriptions();
-    return subs[discordId] || null;
-}
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const noblox = require('noblox.js');
+const setupManager = require('../utils/setupManager');
+const xpDb = require('../xpManager');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("update")
-        .setDescription("Sync Discord roles based on premium & Roblox rank/verification")
+        .setName('update')
+        .setDescription('Sync Discord roles based on premium & Roblox rank/verification')
         .addStringOption(opt =>
             opt
-                .setName("roblox")
-                .setDescription("Roblox username to update (default = your linked account)")
+                .setName('roblox')
+                .setDescription('Roblox username to update (default = your linked account)')
                 .setRequired(false)
         ),
 
     async execute(interaction) {
-        await interaction.deferReply({ ephemeral: true }).catch(() => { });
-        if (!interaction.guild || !interaction.member) {
-            return interaction.editReply({ content: "❌ Use this command in a server.", ephemeral: true });
-        }
-
-        const member = interaction.member;
-        const discordId = interaction.user.id;
-
-        // 1) Load subscription
-        const subscriptions = await loadSubscriptions();
-        const record = subscriptions[discordId];
-
-        // 2) Expiration logic for monthly/annual
-        if (record && record.plan !== "lifetime") {
-            if (!record.expires || Date.now() > record.expires) {
-                // expired → remove record & roles
-                delete subscriptions[discordId];
-                await saveSubscriptions(subscriptions).catch(() => { });
-                const expiredRoles = Object.values(ROLE_IDS).flat();
-                await member.roles.remove(expiredRoles, "Subscription expired").catch(() => { });
-                return interaction.editReply({ content: "❌ Your subscription has expired.", ephemeral: true });
-            }
-        }
-
-        // 3) Clear any existing premium roles
-        const allPremiumRoles = Object.values(ROLE_IDS).flat();
-        await member.roles.remove(allPremiumRoles, "Sync subscription roles").catch(() => { });
-
-        // 4) Re‑assign based on current record
-        if (record) {
-            let toAdd = [];
-            if (record.plan === "lifetime") {
-                toAdd = ROLE_IDS.lifetime;
-            } else if (["monthly", "annual"].includes(record.plan)) {
-                toAdd = [ROLE_IDS.monthly];
-            }
-            if (toAdd.length) {
-                await member.roles.add(toAdd, "Assign subscription roles").catch(console.error);
-            }
-        }
-
-        // 5) Now perform your existing Roblox/verification sync
         try {
-            // Load guild config
-            const cfg = await setupManager.getConfig(interaction.guildId);
-            if (!cfg || !cfg.groupId) {
-                return interaction.editReply("❌ This server is not configured. Run `/setup` first.");
-            }
-            const {
-                groupId,
-                roleBindings = [],
-                verificationRoleId = null,
-                unverifiedRoleId = null,
-                bypassRoleId = null
-            } = cfg;
+            await interaction.deferReply();
+            const member = interaction.member;
+            const guildId = interaction.guildId;
+            const discordId = interaction.user.id;
 
-            // Determine Roblox username & target Discord ID
-            let robloxName = interaction.options.getString("roblox");
-            let targetId = discordId;
+            if (!member || !interaction.guild) {
+                return interaction.editReply('❌ This command must be run in a server.');
+            }
+
+            // Esempio: ruoli premium da env
+            const PREMIUM_ROLE_ID = process.env.DISCORD_PREMIUM_ROLE_ID;
+            const LIFETIME_ROLE_ID = process.env.DISCORD_LIFETIME_ROLE_ID;
+            const EARLY_ACCESS_ROLE_ID = process.env.DISCORD_EARLY_ACCESS_ROLE_ID;
+            const PREMIUM_SERVER_ID = process.env.PREMIUM_SERVER_ID || '1143513693091528824';
+
+            // 1) Controlla premium
+            const isPremium = await xpDb.isPremiumUser(discordId).catch(() => false);
+
+            const rolesAdded = [];
+            const rolesRemoved = [];
+
+            // 2) Rimuovi ruoli premium esistenti
+            const allPremiumRoles = [PREMIUM_ROLE_ID, LIFETIME_ROLE_ID, EARLY_ACCESS_ROLE_ID].filter(Boolean);
+            for (const roleId of allPremiumRoles) {
+                if (member.roles.cache.has(roleId)) {
+                    await member.roles.remove(roleId, 'Cleanup existing premium roles');
+                    rolesRemoved.push(roleId);
+                }
+            }
+
+            // 3) Se premium e in server dedicato, aggiungi ruoli
+            if (isPremium && guildId === PREMIUM_SERVER_ID) {
+                const planRecord = await xpDb.getGuildPremiumRecord(guildId, discordId).catch(() => null);
+                if (planRecord && planRecord.plan === 'lifetime') {
+                    for (const roleId of [LIFETIME_ROLE_ID, PREMIUM_ROLE_ID, EARLY_ACCESS_ROLE_ID]) {
+                        if (roleId && !member.roles.cache.has(roleId)) {
+                            await member.roles.add(roleId, 'Grant lifetime premium package');
+                            rolesAdded.push(roleId);
+                        }
+                    }
+                } else {
+                    if (PREMIUM_ROLE_ID && !member.roles.cache.has(PREMIUM_ROLE_ID)) {
+                        await member.roles.add(PREMIUM_ROLE_ID, 'Grant standard premium');
+                        rolesAdded.push(PREMIUM_ROLE_ID);
+                    }
+                }
+            }
+
+            // 4) Sync Roblox/group roles & verification
+            const cfg = await setupManager.getConfig(guildId);
+            if (!cfg?.groupId) {
+                return interaction.editReply('❌ This server is not configured. Run `/setup` first.');
+            }
+            const { groupId, roleBindings = [], verificationRoleId, unverifiedRoleId } = cfg;
+
+            // Determina account Roblox target
+            let robloxName = interaction.options.getString('roblox');
+            let targetDiscordId = discordId;
+
             if (robloxName) {
                 const linked = await xpDb.getDiscordUserIdFromRobloxName(robloxName);
-                if (linked) targetId = linked;
+                if (linked) targetDiscordId = linked;
                 else {
                     const allLinked = await xpDb.getAllLinked();
                     const found = allLinked.find(l => l.robloxName.toLowerCase() === robloxName.toLowerCase());
-                    if (found) targetId = found.discordId;
-                    else {
-                        return interaction.editReply(
-                            `❌ No Discord user linked to Roblox username \`${robloxName}\`. They must run \`/verify\`.`
-                        );
-                    }
+                    if (found) targetDiscordId = found.discordId;
+                    else return interaction.editReply(`❌ No one linked to Roblox username \`${robloxName}\`. They must run \`/verify\`.`);
                 }
             } else {
-                robloxName = await xpDb.getLinked(targetId);
+                robloxName = await xpDb.getLinked(targetDiscordId);
                 if (!robloxName) {
-                    return interaction.editReply("❌ You have not linked your Roblox account. Run `/verify` first.");
+                    return interaction.editReply('❌ You have not linked your Roblox account. Run `/verify` first.');
                 }
             }
 
-            // Fetch Roblox data
+            // Fetch Roblox info
             await noblox.setCookie(process.env.ROBLOX_COOKIE).catch(() => { });
-            const robloxUserId = await noblox.getIdFromUsername(robloxName).catch(() => {
-                throw new Error(`Could not find Roblox user \`${robloxName}\`.`);
-            });
-            const rank = await noblox.getRankInGroup(groupId, robloxUserId).catch(err => {
-                throw new Error(`Error fetching Roblox rank: ${err.message}`);
-            });
-            const roles = await noblox.getRoles(groupId).catch(err => {
-                throw new Error(`Error fetching group roles: ${err.message}`);
-            });
-            const matched = roles.find(r => r.rank === rank) || null;
-            const matchedName = matched?.name || "None";
+            const robloxUserId = await noblox.getIdFromUsername(robloxName)
+                .catch(() => { throw new Error(`Could not find Roblox user \`${robloxName}\``); });
+            const rank = await noblox.getRankInGroup(groupId, robloxUserId)
+                .catch(err => { throw new Error(`Error fetching Roblox rank: ${err.message}`); });
+            const groupRoles = await noblox.getRoles(groupId)
+                .catch(err => { throw new Error(`Error fetching group roles: ${err.message}`); });
+            const matchedRole = groupRoles.find(r => r.rank === rank) || null;
+            const matchedName = matchedRole?.name || 'None';
 
-            // Build sets
-            const toAddSet = new Set();
-            const toRemoveSet = new Set();
+            // Costruisci insiemi da aggiungere/rimuovere
+            const toAdd = new Set();
+            const toRemove = new Set();
 
-            // a) groupRole binding
-            const bind = roleBindings.find(b => b.groupRoleId === matched?.id);
-            if (bind) toAddSet.add(bind.discordRoleId);
+            // a) group-role binding
+            const binding = roleBindings.find(b => b.groupRoleId === matchedRole?.id);
+            if (binding) toAdd.add(binding.discordRoleId);
 
-            // b) verification
-            const linkedCheck = await xpDb.getLinked(targetId);
-            if (verificationRoleId && linkedCheck) toAddSet.add(verificationRoleId);
+            // b) verifica
+            const isLinked = await xpDb.getLinked(targetDiscordId);
+            if (verificationRoleId && isLinked) toAdd.add(verificationRoleId);
 
-            // c) premium role already handled above
-
-            // Fetch member to update roles
-            const guildMember = await interaction.guild.members.fetch(targetId);
-
-            // Remove old binding/unverified
+            // c) removals
+            const targetMember = await interaction.guild.members.fetch(targetDiscordId);
             for (const { discordRoleId } of roleBindings) {
-                if (!toAddSet.has(discordRoleId) && guildMember.roles.cache.has(discordRoleId)) {
-                    toRemoveSet.add(discordRoleId);
+                if (!toAdd.has(discordRoleId) && targetMember.roles.cache.has(discordRoleId)) {
+                    toRemove.add(discordRoleId);
                 }
             }
-            if (unverifiedRoleId && guildMember.roles.cache.has(unverifiedRoleId)) {
-                toRemoveSet.add(unverifiedRoleId);
+            if (unverifiedRoleId && targetMember.roles.cache.has(unverifiedRoleId)) {
+                toRemove.add(unverifiedRoleId);
             }
 
-            // Apply group & verification roles
-            if (toAddSet.size) {
-                await guildMember.roles.add([...toAddSet], "Sync group & verify roles");
+            // Applica ruoli
+            for (const rId of toAdd) {
+                if (!targetMember.roles.cache.has(rId)) {
+                    await targetMember.roles.add(rId, 'Sync group/verification role');
+                    rolesAdded.push(rId);
+                }
             }
-            if (toRemoveSet.size) {
-                await guildMember.roles.remove([...toRemoveSet], "Remove outdated group/unverified");
+            for (const rId of toRemove) {
+                if (targetMember.roles.cache.has(rId)) {
+                    await targetMember.roles.remove(rId, 'Remove outdated group/verification role');
+                    rolesRemoved.push(rId);
+                }
             }
 
             // Sync nickname
-            if (guildMember.nickname !== robloxName) {
-                await guildMember.setNickname(robloxName, "Sync nickname to Roblox username").catch(() => { });
+            if (targetMember.nickname !== robloxName) {
+                await targetMember.setNickname(robloxName, 'Sync nickname to Roblox username').catch(() => { });
             }
 
-            // Confirmation embed
+            // 5) Embed finale
+            const added = rolesAdded.length
+                ? rolesAdded.map(r => `<@&${r}>`).join(' ')
+                : 'None';
+            const removed = rolesRemoved.length
+                ? rolesRemoved.map(r => `<@&${r}>`).join(' ')
+                : 'None';
+
             const embed = new EmbedBuilder()
-                .setTitle("🔄 Update Completed")
-                .addFields(
-                    { name: "Roblox User", value: `\`${robloxName}\``, inline: false },
-                    { name: "Discord Member", value: `<@${targetId}>`, inline: false },
-                    { name: "Group Role", value: matchedName, inline: false },
-                    { name: "Roles Added", value: "Premium & binding roles", inline: false },
-                    { name: "Roles Removed", value: "Outdated roles", inline: false }
-                )
+                .setTitle('🔄 Update Completed')
                 .setColor(0x5865f2)
+                .addFields(
+                    { name: 'Roblox User', value: `\`${robloxName}\``, inline: false },
+                    { name: 'Discord Member', value: `<@${targetDiscordId}>`, inline: false },
+                    { name: 'Group Role', value: matchedName, inline: false },
+                    { name: 'Roles Added', value: added, inline: true },
+                    { name: 'Roles Removed', value: removed, inline: true }
+                )
                 .setTimestamp();
 
             return interaction.editReply({ embeds: [embed] });
-        } catch (err) {
-            console.error("Error in /update flow:", err);
-            return interaction.editReply({ content: `❌ ${err.message}`, ephemeral: true });
+        } catch (error) {
+            console.error('Error in /update:', error);
+            const msg = `❌ ${error.message}`;
+            if (interaction.deferred || interaction.replied) {
+                return interaction.editReply({ content: msg });
+            } else {
+                return interaction.reply({ content: msg });
+            }
         }
-    },
+    }
 };
