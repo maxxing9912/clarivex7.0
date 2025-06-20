@@ -7,212 +7,218 @@ const noblox = require('noblox.js');
 module.exports = {
     name: Events.InteractionCreate,
     /**
-     * Gestisce i button interactions con customId che iniziano con "confirm_join_"
-     * per setup e transfer.
-     * @param {import('discord.js').Interaction} interaction 
+     * Handles Button interactions whose customId starts with "confirm_join_"
+     * for both initial setup and group transfer flows.
+     * @param {import('discord.js').ButtonInteraction} interaction 
      */
     async execute(interaction) {
         if (!interaction.isButton()) return;
         if (!interaction.customId.startsWith('confirm_join_')) return;
 
-        // Defer come ephemeral (invisibile agli altri)
+        // Defer reply as ephemeral so only the clicker sees it
         try {
             await interaction.deferReply({ ephemeral: true });
         } catch (err) {
-            console.warn('[ConfirmJoin] Impossibile fare deferReply:', err);
-            // Continuiamo comunque; potremmo già aver risposto
+            console.warn('[ConfirmJoin] Could not defer reply:', err);
         }
 
-        // Estrazione guildId dal customId: formato atteso "confirm_join_<guildId>"
+        // Extract guildId from customId = "confirm_join_<guildId>"
         const parts = interaction.customId.split('_');
-        // Se customId è "confirm_join_123456789", parts = ['confirm','join','123456789']
         const guildId = parts.slice(2).join('_');
-        console.log(`[ConfirmJoin] Pulsante cliccato: customId="${interaction.customId}", estratto guildId="${guildId}", interaction.guildId="${interaction.guildId}"`);
+        console.log(`[ConfirmJoin] Button clicked: customId="${interaction.customId}", extracted guildId="${guildId}", interaction.guildId="${interaction.guildId}"`);
 
-        // ─── 1) Pending Setup ───
+        // --- 1) Check pending setup ---
         let pendingSetup;
         try {
             pendingSetup = await setupManager.getPendingSetup(guildId);
         } catch (err) {
-            console.error('[ConfirmJoin] Errore getPendingSetup:', err);
-            return interaction.editReply({ content: '❌ Errore interno: impossibile recuperare il setup pendente. Riprova più tardi.' });
+            console.error('[ConfirmJoin] Error in getPendingSetup:', err);
+            return interaction.editReply({
+                content: '❌ Internal error: failed to retrieve pending setup. Please try again later.'
+            });
         }
         console.log('[ConfirmJoin] pendingSetup:', pendingSetup);
 
         if (pendingSetup) {
-            // ATTENZIONE: adatta il nome della proprietà per il canale originale!
-            // Se nel setPendingSetup avete salvato ad esempio `requestingChannelId`, usate quello.
-            const { groupId, premiumKey, requestingChannelId /*oppure invokingChannelId*/ } = pendingSetup;
+            // Adapt these property names to what you actually saved in setupManager.setPendingSetup:
+            const { groupId, premiumKey, requestingChannelId /* or invokingChannelId */ } = pendingSetup;
 
-            // Controllo se esiste già configurazione definitiva
+            // Check if already configured:
             let existingCfg;
             try {
                 existingCfg = await setupManager.getConfig(guildId);
             } catch (err) {
-                console.error('[ConfirmJoin] Errore getConfig:', err);
-                return interaction.editReply({ content: '❌ Errore interno: impossibile verificare configurazione esistente.' });
+                console.error('[ConfirmJoin] Error in getConfig (setup flow):', err);
+                return interaction.editReply({
+                    content: '❌ Internal error: failed to verify existing configuration.'
+                });
             }
             if (existingCfg && existingCfg.groupId) {
                 return interaction.editReply({
-                    content: '🚫 Questo server è già configurato con un gruppo Roblox.'
+                    content: '🚫 This server is already configured with a Roblox group.'
                 });
             }
 
             try {
-                // Imposto cookie Roblox
+                // Ensure ROBLOX_COOKIE is set
                 if (!process.env.ROBLOX_COOKIE) {
-                    console.error('[ConfirmJoin] ROBLOX_COOKIE non impostata');
-                    return interaction.editReply({ content: '❌ Errore di configurazione: manca la ROBLOX_COOKIE.' });
+                    console.error('[ConfirmJoin] ROBLOX_COOKIE is not set');
+                    return interaction.editReply({
+                        content: '❌ Configuration error: ROBLOX_COOKIE is missing on the bot.'
+                    });
                 }
                 await noblox.setCookie(process.env.ROBLOX_COOKIE);
 
-                // Ottengo info sull’account bot
+                // Get bot's Roblox user
                 const botUser = await noblox.getAuthenticatedUser();
-                console.log('[ConfirmJoin] getAuthenticatedUser restituisce:', botUser);
-                // A seconda della versione noblox, la proprietà id potrebbe essere botUser.id o botUser.UserID
+                console.log('[ConfirmJoin] getAuthenticatedUser returned:', botUser);
                 const botUserId = botUser.id ?? botUser.UserID;
                 if (!botUserId) {
-                    console.error('[ConfirmJoin] Impossibile determinare botUserId da getAuthenticatedUser():', botUser);
-                    throw new Error('Could not determine bot user ID from getAuthenticatedUser()');
+                    console.error('[ConfirmJoin] Could not determine botUserId from getAuthenticatedUser():', botUser);
+                    throw new Error('Could not determine bot user ID');
                 }
 
-                // Verifico che groupId sia un numero valido
+                // Validate stored groupId
                 const numericGroupId = Number(groupId);
                 if (isNaN(numericGroupId)) {
-                    console.warn('[ConfirmJoin] groupId memorizzato non valido:', groupId);
+                    console.warn('[ConfirmJoin] Stored groupId is invalid:', groupId);
                     return interaction.editReply({
-                        content: '❌ L’ID del gruppo memorizzato non è valido.'
+                        content: '❌ The stored Group ID is invalid.'
                     });
                 }
 
-                // Controllo rank del bot nel gruppo
+                // Check bot rank in group
                 let botRank;
                 try {
                     botRank = await noblox.getRankInGroup(numericGroupId, botUserId);
                 } catch (err) {
-                    console.warn('[ConfirmJoin] getRankInGroup ha fallito:', err);
+                    console.warn('[ConfirmJoin] getRankInGroup failed:', err);
                     botRank = 0;
                 }
-                console.log(`[ConfirmJoin] botRank in gruppo ${numericGroupId}:`, botRank);
+                console.log(`[ConfirmJoin] Bot rank in group ${numericGroupId}:`, botRank);
+
                 if (!botRank || botRank === 0) {
                     return interaction.editReply({
-                        content: '❌ Il bot non risulta ancora membro del gruppo Roblox. Aggiungilo e poi clicca nuovamente il pulsante.'
+                        content: '❌ The bot is not yet a member of the Roblox group. Please add the bot to the group and click again.'
                     });
                 }
 
-                // Bot è nel gruppo: salvo la configurazione definitiva
-                // setConfig internamente cancella il pendingSetup, ma potete chiamare anche clearPendingSetup prima.
+                // Bot is in the group: save final config
                 try {
-                    // Prima cancelliamo esplicitamente pending (opzionale, setConfig lo fa comunque)
+                    // Optionally clear pending explicitly; setConfig may clear it internally
                     await setupManager.clearPendingSetup(guildId);
                 } catch (err) {
-                    console.warn('[ConfirmJoin] clearPendingSetup ha fallito (ma procedo comunque):', err);
+                    console.warn('[ConfirmJoin] clearPendingSetup failed (continuing):', err);
                 }
                 const configData = {
                     groupId: String(groupId),
                     premiumKey: premiumKey ?? null,
-                    // Altri campi iniziali se necessari:
                     roleBindings: [],
-                    // ... verificationRoleId: null, unverifiedRoleId: null, ecc.
+                    // other initial config fields if needed
                 };
                 try {
                     await setupManager.setConfig(guildId, configData);
                 } catch (err) {
-                    console.error('[ConfirmJoin] setConfig ha fallito:', err);
-                    return interaction.editReply({ content: '❌ Errore interno: impossibile salvare la configurazione definitiva.' });
+                    console.error('[ConfirmJoin] setConfig failed:', err);
+                    return interaction.editReply({
+                        content: '❌ Internal error: failed to save the final configuration.'
+                    });
                 }
 
-                // Embed di successo per chi ha cliccato
+                // Send success embed to the user who clicked
                 const successEmbed = new EmbedBuilder()
-                    .setTitle('✅ Bot Configurato Correttamente')
+                    .setTitle('✅ Bot Configured Successfully')
                     .setDescription([
                         `**Group ID:** \`${groupId}\``,
-                        'Il bot è stato trovato nel gruppo e la configurazione è completata.'
+                        'The bot was found in the group and configuration is now complete.'
                     ].join('\n'))
                     .setColor(0x57f287)
                     .setTimestamp();
                 await interaction.editReply({ embeds: [successEmbed] });
 
-                // Notifica nel canale originario (/setup), se salvato
+                // Notify the original channel where /setup was invoked
                 if (requestingChannelId) {
                     try {
                         const originalChannel = await interaction.client.channels.fetch(requestingChannelId);
                         if (originalChannel && originalChannel.isTextBased()) {
                             await originalChannel.send({
-                                content: `✅ Il bot è stato aggiunto correttamente al gruppo Roblox **${groupId}** e la configurazione è ora attiva!`
+                                content: `✅ The bot has been successfully added to Roblox Group **${groupId}** and is now configured!`
                             });
                         } else {
-                            console.warn('[ConfirmJoin] originalChannel non trovato o non text-based:', requestingChannelId);
+                            console.warn('[ConfirmJoin] Original channel not found or not text-based:', requestingChannelId);
                         }
                     } catch (err) {
-                        console.error('[ConfirmJoin] Fallita notifica canale originario:', err);
+                        console.error('[ConfirmJoin] Failed to notify original channel:', err);
                     }
                 } else {
-                    console.warn('[ConfirmJoin] requestingChannelId non definito nel pendingSetup');
+                    console.warn('[ConfirmJoin] requestingChannelId not defined in pendingSetup');
                 }
 
                 return;
             } catch (err) {
-                console.error('❌ Errore durante il flusso di conferma setup:', err);
+                console.error('[ConfirmJoin] Error during setup confirmation flow:', err);
                 return interaction.editReply({
-                    content:
-                        '❌ Qualcosa è andato storto durante la verifica dell’appartenenza del bot al gruppo Roblox. Riprova più tardi.'
+                    content: '❌ Something went wrong while verifying the bot’s membership in the Roblox group. Please try again later.'
                 });
             }
         }
 
-        // ─── 2) Pending Transfer ───
+        // --- 2) Check pending transfer ---
         let pendingTransfer;
         try {
             pendingTransfer = await setupManager.getPendingTransfer(guildId);
         } catch (err) {
-            console.error('[ConfirmJoin] Errore getPendingTransfer:', err);
-            // Non blocchiamo qui, passiamo al messaggio di nessun pending
+            console.error('[ConfirmJoin] Error in getPendingTransfer:', err);
             pendingTransfer = null;
         }
         console.log('[ConfirmJoin] pendingTransfer:', pendingTransfer);
 
         if (pendingTransfer) {
-            const { oldGroupId, newGroupId, requestingChannelId /*oppure invokingChannelId*/ } = pendingTransfer;
+            // Adapt property names to how you saved them
+            const { oldGroupId, newGroupId, requestingChannelId /* or invokingChannelId */ } = pendingTransfer;
 
-            // Verifica configurazione esistente
+            // Verify existing config
             let existingCfg;
             try {
                 existingCfg = await setupManager.getConfig(guildId);
             } catch (err) {
-                console.error('[ConfirmJoin] Errore getConfig in transfer:', err);
-                return interaction.editReply({ content: '❌ Errore interno: impossibile recuperare la configurazione esistente.' });
+                console.error('[ConfirmJoin] Error in getConfig (transfer flow):', err);
+                return interaction.editReply({
+                    content: '❌ Internal error: failed to retrieve existing configuration.'
+                });
             }
             if (!existingCfg || !existingCfg.groupId) {
                 return interaction.editReply({
-                    content: '❌ Non esiste una configurazione esistente in questo server da trasferire.'
+                    content: '❌ There is no existing configuration on this server to transfer.'
                 });
             }
             if (existingCfg.groupId === String(newGroupId)) {
                 return interaction.editReply({
-                    content: '❌ Non puoi trasferire allo stesso gruppo già configurato.'
+                    content: '❌ Cannot transfer to the same group that is already configured.'
                 });
             }
 
             try {
                 if (!process.env.ROBLOX_COOKIE) {
-                    console.error('[ConfirmJoin-Transfer] ROBLOX_COOKIE non impostata');
-                    return interaction.editReply({ content: '❌ Errore di configurazione: manca la ROBLOX_COOKIE.' });
+                    console.error('[ConfirmJoin-Transfer] ROBLOX_COOKIE is not set');
+                    return interaction.editReply({
+                        content: '❌ Configuration error: ROBLOX_COOKIE is missing on the bot.'
+                    });
                 }
                 await noblox.setCookie(process.env.ROBLOX_COOKIE);
 
                 const botUser = await noblox.getAuthenticatedUser();
-                console.log('[ConfirmJoin-Transfer] getAuthenticatedUser:', botUser);
+                console.log('[ConfirmJoin-Transfer] getAuthenticatedUser returned:', botUser);
                 const botUserId = botUser.id ?? botUser.UserID;
                 if (!botUserId) {
-                    console.error('[ConfirmJoin-Transfer] Impossibile determinare botUserId');
+                    console.error('[ConfirmJoin-Transfer] Could not determine botUserId:', botUser);
                     throw new Error('Could not determine bot user ID');
                 }
 
                 const numericNewGroupId = Number(newGroupId);
                 if (isNaN(numericNewGroupId)) {
                     return interaction.editReply({
-                        content: '❌ L’ID del nuovo gruppo non è valido.'
+                        content: '❌ The new Group ID is invalid.'
                     });
                 }
 
@@ -220,21 +226,22 @@ module.exports = {
                 try {
                     botRank = await noblox.getRankInGroup(numericNewGroupId, botUserId);
                 } catch (err) {
-                    console.warn('[ConfirmJoin-Transfer] getRankInGroup fallito:', err);
+                    console.warn('[ConfirmJoin-Transfer] getRankInGroup failed:', err);
                     botRank = 0;
                 }
-                console.log(`[ConfirmJoin-Transfer] botRank in nuovo gruppo ${numericNewGroupId}:`, botRank);
+                console.log(`[ConfirmJoin-Transfer] Bot rank in new group ${numericNewGroupId}:`, botRank);
+
                 if (!botRank || botRank === 0) {
                     return interaction.editReply({
-                        content: '❌ Il bot non risulta ancora membro del nuovo gruppo Roblox. Aggiungilo e riprova.'
+                        content: '❌ The bot is not yet a member of the new Roblox group. Please add it to that group and click again.'
                     });
                 }
 
-                // Bot è nel nuovo gruppo: salvo nuova config
+                // Bot is in the new group: save updated config
                 try {
                     await setupManager.clearPendingTransfer(guildId);
                 } catch (err) {
-                    console.warn('[ConfirmJoin-Transfer] clearPendingTransfer fallito:', err);
+                    console.warn('[ConfirmJoin-Transfer] clearPendingTransfer failed (continuing):', err);
                 }
                 const updatedCfg = {
                     ...existingCfg,
@@ -243,52 +250,53 @@ module.exports = {
                 try {
                     await setupManager.setConfig(guildId, updatedCfg);
                 } catch (err) {
-                    console.error('[ConfirmJoin-Transfer] setConfig fallito:', err);
-                    return interaction.editReply({ content: '❌ Errore interno: impossibile salvare la configurazione aggiornata.' });
+                    console.error('[ConfirmJoin-Transfer] setConfig failed:', err);
+                    return interaction.editReply({
+                        content: '❌ Internal error: failed to save the updated configuration.'
+                    });
                 }
 
                 const successEmbed = new EmbedBuilder()
-                    .setTitle('✅ Setup Trasferito')
+                    .setTitle('✅ Setup Transferred')
                     .setDescription([
                         `• **Old Group ID:** \`${oldGroupId}\``,
                         `• **New Group ID:** \`${newGroupId}\``,
-                        'Il bot è stato trovato nel nuovo gruppo e il trasferimento è completato.'
+                        'The bot was found in the new group and transfer is now complete.'
                     ].join('\n'))
                     .setColor(0x57f287)
                     .setTimestamp();
                 await interaction.editReply({ embeds: [successEmbed] });
 
-                // Notifica canale originario (/transfer-group)
+                // Notify original channel where /transfer-group was invoked
                 if (requestingChannelId) {
                     try {
                         const originalChannel = await interaction.client.channels.fetch(requestingChannelId);
                         if (originalChannel && originalChannel.isTextBased()) {
                             await originalChannel.send({
-                                content: `✅ Il bot è stato spostato correttamente dal gruppo **${oldGroupId}** a **${newGroupId}**!`
+                                content: `✅ The bot has been successfully moved from Roblox Group **${oldGroupId}** to **${newGroupId}**!`
                             });
                         } else {
-                            console.warn('[ConfirmJoin-Transfer] originalChannel non trovato o non text-based:', requestingChannelId);
+                            console.warn('[ConfirmJoin-Transfer] Original channel not found or not text-based:', requestingChannelId);
                         }
                     } catch (err) {
-                        console.error('[ConfirmJoin-Transfer] Fallita notifica canale originario:', err);
+                        console.error('[ConfirmJoin-Transfer] Failed to notify original channel:', err);
                     }
                 } else {
-                    console.warn('[ConfirmJoin-Transfer] requestingChannelId non definito nel pendingTransfer');
+                    console.warn('[ConfirmJoin-Transfer] requestingChannelId not defined in pendingTransfer');
                 }
 
                 return;
             } catch (err) {
-                console.error('❌ Errore durante il flusso di transfer:', err);
+                console.error('[ConfirmJoin-Transfer] Error during transfer confirmation flow:', err);
                 return interaction.editReply({
-                    content:
-                        '❌ Qualcosa è andato storto durante la verifica dell’appartenenza del bot al nuovo gruppo Roblox. Riprova più tardi.'
+                    content: '❌ Something went wrong while verifying the bot’s membership in the new Roblox group. Please try again later.'
                 });
             }
         }
 
-        // ─── 3) Nessun pending trovata ───
+        // --- 3) No pending setup or transfer found ---
         return interaction.editReply({
-            content: '❌ Nessuna configurazione pendente o trasferimento trovato per questo server.'
+            content: '❌ No pending setup or transfer found for this server.'
         });
     }
 };
