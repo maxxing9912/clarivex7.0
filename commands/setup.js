@@ -40,7 +40,23 @@ module.exports = {
             const groupId = interaction.options.getString('groupid');
             const premiumKey = interaction.options.getString('premiumkey') || null;
 
-            // 1) Verifica se group già configurato altrove
+            // Se esiste già config definitiva in Postgres (o migrata da QuickDB), blocca
+            const existingCfg = await setupManager.getConfig(guildId);
+            if (existingCfg && existingCfg.groupId) {
+                // Già configurato: rispondi
+                return interaction.editReply({
+                    embeds: [
+                        new EmbedBuilder()
+                            .setTitle('✅ Server Already Configured')
+                            .setDescription(`This server is already configured with Roblox Group ID: \`${existingCfg.groupId}\`. Use /update to sync roles.`)
+                            .setColor('Green')
+                            .setTimestamp()
+                    ]
+                });
+            }
+
+            // Prosegui con logiche di controllo come prima...
+            // 1) Verifica group già configurato altrove
             const otherGuild = await setupManager.findGuildByGroupId(groupId);
             if (otherGuild && otherGuild !== guildId) {
                 await interaction.editReply({
@@ -54,7 +70,6 @@ module.exports = {
                 });
                 return;
             }
-
             // 2) Verifica pending altrove
             const pendingElsewhere = await setupManager.findPendingGuildByGroupId(groupId);
             if (pendingElsewhere && pendingElsewhere !== guildId) {
@@ -69,29 +84,7 @@ module.exports = {
                 });
                 return;
             }
-
-            // 3) Verifica se guild già configurata
-            const existingCfg = await setupManager.getConfig(guildId);
-            if (existingCfg?.groupId) {
-                if (existingCfg.groupId === groupId) {
-                    await interaction.editReply({
-                        embeds: [
-                            new EmbedBuilder()
-                                .setTitle('🚫 Already Configured')
-                                .setDescription('This server is already configured with the same Roblox group.')
-                                .setColor(0xED4245)
-                                .setTimestamp()
-                        ]
-                    });
-                } else {
-                    await interaction.editReply({
-                        content: '❌ This server is already configured with another group. Use `/transfer-group` to change.'
-                    });
-                }
-                return;
-            }
-
-            // 4) Verifica pending in questa guild
+            // 3) Verifica pending in questa guild
             const existingPending = await setupManager.getPendingSetup(guildId);
             if (existingPending) {
                 if (existingPending.groupId === groupId) {
@@ -111,32 +104,23 @@ module.exports = {
                 }
                 return;
             }
-
-            // 5) Fetch group info Roblox e verifica ownership
+            // 4) Fetch group info Roblox e verifica ownership...
             let groupInfo;
             try {
                 groupInfo = await noblox.getGroup(parseInt(groupId, 10));
             } catch (err) {
                 console.error('[setup] noblox.getGroup error:', err);
-                await interaction.editReply({
-                    content: '❌ Unable to fetch group info. Check the Group ID.'
-                });
+                await interaction.editReply({ content: '❌ Unable to fetch group info. Check the Group ID.' });
                 return;
             }
             const ownerId = groupInfo.owner?.userId;
             if (!ownerId) {
-                await interaction.editReply({
-                    content: '❌ Cannot determine the group owner.'
-                });
+                await interaction.editReply({ content: '❌ Cannot determine the group owner.' });
                 return;
             }
-
-            // 6) Verifica che utente abbia linkato Roblox
             const linked = await xpDb.getLinked(userId);
             if (!linked) {
-                await interaction.editReply({
-                    content: '❌ You must first link your Roblox account with `/verify`.'
-                });
+                await interaction.editReply({ content: '❌ You must first link your Roblox account with `/verify`.' });
                 return;
             }
             let linkedId;
@@ -144,29 +128,21 @@ module.exports = {
                 linkedId = await noblox.getIdFromUsername(linked);
             } catch (err) {
                 console.error('[setup] noblox.getIdFromUsername error:', err);
-                await interaction.editReply({
-                    content: '❌ Unable to verify your Roblox username. Retry linking.'
-                });
+                await interaction.editReply({ content: '❌ Unable to verify your Roblox username. Retry linking.' });
                 return;
             }
             if (String(linkedId) !== String(ownerId)) {
-                await interaction.editReply({
-                    content: '❌ You are not the owner of this Roblox group.'
-                });
+                await interaction.editReply({ content: '❌ You are not the owner of this Roblox group.' });
                 return;
             }
-
-            // 7) Salva pending setup in Postgres
+            // 5) Salva pending setup
             await setupManager.setPendingSetup(guildId, {
                 groupId,
                 premiumKey,
                 ownerDiscordId: userId,
                 invokingChannelId: channelId
             });
-
-            // NOTA: non salva subito config definitiva qui; la config definitiva la salverai solo quando l'admin (o chi gestisce) clicca "Confirm Bot in Group"
-
-            // 8) Risposta all'utente
+            // 6) Risposta all’utente
             const embedUser = new EmbedBuilder()
                 .setTitle('⚙️ Setup Pending')
                 .setDescription([
@@ -178,29 +154,22 @@ module.exports = {
                 .setColor(0xffa500)
                 .setTimestamp();
             await interaction.editReply({ embeds: [embedUser] });
-
-            // 9) Invia il messaggio nel canale pending per conferma
+            // 7) Invia messaggio pending con bottone
             const confirmButton = new ButtonBuilder()
                 .setCustomId(`confirm_join_${guildId}`)
                 .setLabel('✅ Confirm Bot in Group')
                 .setStyle(ButtonStyle.Success);
             const row = new ActionRowBuilder().addComponents(confirmButton);
-
             const embedPending = new EmbedBuilder()
                 .setTitle('🚧 Bot Join Request')
                 .addFields(
                     { name: 'Server', value: `<#${channelId}>`, inline: true },
                     { name: 'User', value: `<@${userId}>`, inline: true },
                     { name: 'Group', value: `[${groupId}](https://www.roblox.com/groups/${groupId})`, inline: false },
-                    {
-                        name: '\u200B',
-                        value: '⚠️ Add the bot to the group, then click “Confirm Bot in Group”.'
-                    }
+                    { name: '\u200B', value: '⚠️ Add the bot to the group, then click “Confirm Bot in Group”.' }
                 )
                 .setColor(0xFFA500)
                 .setTimestamp();
-
-            // Recupera ID da env
             const PENDING_CHANNEL_ID = process.env.PENDING_CHANNEL_ID;
             if (!PENDING_CHANNEL_ID) {
                 console.error('[setup] PENDING_CHANNEL_ID not set in env.');
@@ -208,10 +177,7 @@ module.exports = {
                 try {
                     const pendingChannel = await interaction.client.channels.fetch(PENDING_CHANNEL_ID);
                     if (pendingChannel?.isTextBased()) {
-                        await pendingChannel.send({
-                            embeds: [embedPending],
-                            components: [row]
-                        });
+                        await pendingChannel.send({ embeds: [embedPending], components: [row] });
                         console.log(`[setup] Sent pending embed for guild ${guildId}`);
                     } else {
                         console.error(`❌ PENDING_CHANNEL_ID (${PENDING_CHANNEL_ID}) is not a valid text channel.`);
