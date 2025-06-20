@@ -1,14 +1,13 @@
-﻿// utils/initDatabase.js
+// utils/initDatabase.js
 const db = require('../database');
 
 async function initDatabase() {
-    // Skip se DATABASE_URL non è definito o pool non creato
     if (!process.env.DATABASE_URL) {
-        console.log('initDatabase: DATABASE_URL non impostato, skip creazione tabelle');
+        console.log('initDatabase: DATABASE_URL not set, skipping table creation');
         return;
     }
     if (!db.pool) {
-        console.log('initDatabase: db.pool non definito, skip creazione tabelle');
+        console.log('initDatabase: db.pool not defined, skipping table creation');
         return;
     }
 
@@ -157,15 +156,14 @@ async function initDatabase() {
       );
     `);
 
-        console.log('initDatabase: inizializzazione tabelle completata');
+        console.log('initDatabase: table initialization complete');
     } catch (err) {
         if (err.code === 'ECONNREFUSED' ||
             (err instanceof AggregateError && err.errors?.some(e => e.code === 'ECONNREFUSED'))) {
-            console.warn('initDatabase: connessione DB rifiutata, verifica server/Postgres o DATABASE_URL');
+            console.warn('initDatabase: DB connection refused, check server/Postgres or DATABASE_URL');
         } else {
             console.error('initDatabase error:', err);
         }
-        // Non rilancia: il bot continua comunque
     }
 }
 
