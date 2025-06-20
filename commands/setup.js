@@ -28,18 +28,25 @@ module.exports = {
                 .setRequired(false)
         ),
 
+    /**
+     * Executes the /setup command:
+     * 1. Validates inputs and ownership.
+     * 2. Saves pending setup in DB under guildId.
+     * 3. Sends a “Confirm Bot Is In Group” button to the pending channel.
+     */
     async execute(interaction) {
+        // Defer reply so user sees ephemeral response
         await interaction.deferReply({ ephemeral: true });
 
         const guildId = interaction.guild.id;
         const userId = interaction.user.id;
-        const channelId = interaction.channel.id;
+        const invokingChannelId = interaction.channel.id;
         const groupId = interaction.options.getString('groupid');
         const premiumKey = interaction.options.getString('premiumkey') ?? null;
 
         console.log(`[Setup] Invoked by user ${userId} in guild ${guildId}, groupId=${groupId}`);
 
-        // 1) Already configured elsewhere?
+        // 1) Check if this Roblox group is already configured in another guild
         let otherGuild;
         try {
             otherGuild = await setupManager.findGuildByGroupId(groupId);
@@ -58,7 +65,7 @@ module.exports = {
             });
         }
 
-        // 2) Pending elsewhere?
+        // 2) Check if there is a pending setup elsewhere for this group
         let pendingElsewhere;
         try {
             pendingElsewhere = await setupManager.findPendingGuildByGroupId(groupId);
@@ -77,7 +84,7 @@ module.exports = {
             });
         }
 
-        // 3) This server already configured?
+        // 3) Check if this server is already configured with a group
         let existingConfig;
         try {
             existingConfig = await setupManager.getConfig(guildId);
@@ -102,7 +109,7 @@ module.exports = {
             }
         }
 
-        // 4) Pending in this server?
+        // 4) Check if there is a pending setup in this server already
         let existingPending;
         try {
             existingPending = await setupManager.getPendingSetup(guildId);
@@ -127,7 +134,7 @@ module.exports = {
             }
         }
 
-        // 5) Fetch Roblox group & verify ownership
+        // 5) Fetch Roblox group info & verify ownership
         let groupInfo;
         try {
             groupInfo = await noblox.getGroup(parseInt(groupId, 10));
@@ -161,23 +168,22 @@ module.exports = {
             return interaction.editReply('❌ You are not the owner of this Roblox group.');
         }
 
-        // 7) Save pending setup
+        // 7) Save pending setup under this Discord guild ID
         try {
-            await setupManager.setPendingSetup(guildId, {
+            const pendingData = {
                 groupId,
                 premiumKey,
                 ownerDiscordId: userId,
-                requestingChannelId: channelId
-            });
-            console.log(`[Setup] Saved pendingSetup for guild ${guildId}:`, {
-                groupId, premiumKey, ownerDiscordId: userId, requestingChannelId: channelId
-            });
+                requestingChannelId: invokingChannelId
+            };
+            await setupManager.setPendingSetup(guildId, pendingData);
+            console.log(`[Setup] Saved pendingSetup for guild ${guildId}:`, pendingData);
         } catch (err) {
             console.error('[Setup] Error in setPendingSetup:', err);
             return interaction.editReply('❌ Internal error: could not save pending setup.');
         }
 
-        // 8) Notify the user
+        // 8) Inform the user the setup is pending
         await interaction.editReply({
             embeds: [
                 new EmbedBuilder()
@@ -192,8 +198,9 @@ module.exports = {
             ]
         });
 
-        // 9) Send button to pending channel, with debug logs
+        // 9) Send the pending-request embed + button to the pending channel
         const confirmButton = new ButtonBuilder()
+            // Use the Discord guild ID here (NOT the Roblox group ID)
             .setCustomId(`confirm_join_${guildId}`)
             .setLabel('✅ Confirm Bot Is In Group')
             .setStyle(ButtonStyle.Success);
@@ -203,7 +210,7 @@ module.exports = {
         const pendingEmbed = new EmbedBuilder()
             .setTitle('🚧 Bot Join Request')
             .addFields(
-                { name: 'Server', value: `<#${channelId}>`, inline: true },
+                { name: 'Server', value: `<#${invokingChannelId}>`, inline: true },
                 { name: 'User', value: `<@${userId}>`, inline: true },
                 { name: 'Roblox Group', value: `[${groupId}](https://www.roblox.com/groups/${groupId})`, inline: false },
                 { name: '\u200B', value: '⚠️ Add the bot to the Roblox group, then click **Confirm Bot Is In Group**.' }
