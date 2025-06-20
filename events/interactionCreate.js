@@ -52,18 +52,17 @@ module.exports = {
                 return interaction.editReply('❌ Internal error checking existing configuration.');
             }
             if (cfg && cfg.groupId) {
-                // Server già configurato
                 return interaction.editReply({
                     content: `✅ This server is already configured with Roblox Group ID \`${cfg.groupId}\`. Use /update to sync roles.`
                 });
             }
-            // Nessun pending e nessuna config: il flusso non è stato inizializzato
             return interaction.editReply('❌ No pending setup found for this server.');
         }
 
         // 5) pendingSetup esiste: procedi con verifica membership e salvataggio config
         const { groupId, premiumKey, invokingChannelId, ownerDiscordId } = pending;
-        // Controlla se nel frattempo è già stata salvata config (race condition)
+
+        // Race check
         let existingCfg;
         try {
             existingCfg = await setupManager.getConfig(guildId);
@@ -72,12 +71,7 @@ module.exports = {
             return interaction.editReply('❌ Internal error checking existing configuration.');
         }
         if (existingCfg && existingCfg.groupId) {
-            // Puliamo pending stale e notifichiamo
-            try {
-                await setupManager.clearPendingSetup(guildId);
-            } catch (e) {
-                console.warn('[ConfirmJoin] clearPendingSetup error:', e);
-            }
+            try { await setupManager.clearPendingSetup(guildId); } catch {}
             return interaction.editReply({
                 content: `✅ This server was already configured with Roblox Group ID \`${existingCfg.groupId}\`. Pending cleared. Use /update to sync roles.`
             });
@@ -110,18 +104,12 @@ module.exports = {
                 console.warn('[ConfirmJoin] getRankInGroup error:', err);
                 botRank = 0;
             }
-            console.log(`[ConfirmJoin] Bot rank in group ${numericGroupId}:`, botRank);
-
-            if (!botRank || botRank === 0) {
+            if (!botRank) {
                 return interaction.editReply('❌ The bot is not yet a member of the Roblox group. Please add it and click again.');
             }
 
             // 7) Bot è nel gruppo: salva config definitiva
-            try {
-                await setupManager.clearPendingSetup(guildId);
-            } catch (e) {
-                console.warn('[ConfirmJoin] clearPendingSetup error:', e);
-            }
+            try { await setupManager.clearPendingSetup(guildId); } catch {}
             const configData = {
                 groupId: String(groupId),
                 premiumKey: premiumKey ?? null,
@@ -130,12 +118,7 @@ module.exports = {
                 unverifiedRoleId: null,
                 bypassRoleId: null
             };
-            try {
-                await setupManager.setConfig(guildId, configData);
-            } catch (err) {
-                console.error('[ConfirmJoin] setConfig error:', err);
-                return interaction.editReply('❌ Internal error: failed to save configuration.');
-            }
+            await setupManager.setConfig(guildId, configData);
 
             const successEmbed = new EmbedBuilder()
                 .setTitle('✅ Bot Configured Successfully')
@@ -151,10 +134,8 @@ module.exports = {
             if (invokingChannelId) {
                 try {
                     const orig = await interaction.client.channels.fetch(invokingChannelId);
-                    if (orig && orig.isTextBased()) {
-                        await orig.send({
-                            content: `✅ The bot has been successfully added to Roblox Group **${groupId}** and is now configured!`
-                        });
+                    if (orig?.isTextBased()) {
+                        await orig.send(`✅ The bot has been successfully added to Roblox Group **${groupId}** and is now configured!`);
                     }
                 } catch (err) {
                     console.error('[ConfirmJoin] error notifying original channel:', err);
