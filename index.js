@@ -1,3 +1,5 @@
+// index.js
+
 require('dotenv').config();
 
 const express = require('express');
@@ -24,9 +26,9 @@ const noblox = require('noblox.js');
 // Suppress Noblox deprecation warnings globally
 noblox.setOptions({ show_deprecation_warnings: false });
 
-const xpManager = require('./xpManager');
-const permManager = require('./utils/permManager');
-const configManager = require('./configManager');
+const xpManager = require('./xpManager');           // Your XP/Roblox link manager
+const permManager = require('./utils/permManager'); // Permissions/rank checks
+const configManager = require('./configManager');   // Your config store (e.g., getSetting, setSetting)
 const AntiRaidManager = require('./utils/antiRaidManager');
 const backupManager = require('./utils/backupManager');
 const setupManager = require('./utils/setupManager');
