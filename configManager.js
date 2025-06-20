@@ -2,11 +2,8 @@
 const db = require('./database');
 
 module.exports = {
-    // --- Altre funzioni esistenti di configManager ---
-    // get, set, delete per configurazioni specifiche se ne hai
-
     /**
-     * Ottiene un’impostazione (JSON) per guildId e chiave key, o null se non esiste.
+     * Get a JSON setting for guildId and key, or null if absent.
      * @param {string} guildId
      * @param {string} key
      * @returns {Promise<any>}
@@ -21,11 +18,10 @@ module.exports = {
     },
 
     /**
-     * Imposta un’impostazione (qualsiasi JSON-serializzabile) per guildId e key.
+     * Set a JSON-serializable setting for guildId and key.
      * @param {string} guildId
      * @param {string} key
      * @param {any} value
-     * @returns {Promise<void>}
      */
     async setSetting(guildId, key, value) {
         await db.query(
@@ -38,10 +34,10 @@ module.exports = {
     },
 
     /**
-     * Rimuove l’impostazione per guildId e key. Restituisce true se eliminato.
+     * Delete setting for guildId and key.
      * @param {string} guildId
      * @param {string} key
-     * @returns {Promise<boolean>}
+     * @returns {Promise<boolean>} whether deleted
      */
     async deleteSetting(guildId, key) {
         const res = await db.query(
@@ -49,10 +45,5 @@ module.exports = {
             [guildId, key]
         );
         return res.rowCount > 0;
-    },
-
-    // Puoi aggiungere alias se preferisci:
-    // async get(guildId, key) { return this.getSetting(guildId, key); },
-    // async set(guildId, key, value) { return this.setSetting(guildId, key, value); },
-    // async delete(guildId, key) { return this.deleteSetting(guildId, key); },
+    }
 };
