@@ -4,6 +4,9 @@ const { Events, EmbedBuilder } = require('discord.js');
 const setupManager = require('../utils/setupManager');
 const noblox = require('noblox.js');
 
+// Suppress deprecation warnings if not already suppressed
+noblox.setOptions({ show_deprecation_warnings: false });
+
 module.exports = {
     name: Events.InteractionCreate,
     /**
