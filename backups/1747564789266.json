@@ -1,0 +1,4398 @@
+{
+  "roles": [
+    {
+      "name": "Corporal",
+      "color": 4586006,
+      "permissions": "35326142973441"
+    },
+    {
+      "name": "Strike II",
+      "color": 328965,
+      "permissions": "0"
+    },
+    {
+      "name": "VERIFIED",
+      "color": 7419530,
+      "permissions": "137442430464"
+    },
+    {
+      "name": "Military Police",
+      "color": 3447003,
+      "permissions": "0"
+    },
+    {
+      "name": "General",
+      "color": 7687244,
+      "permissions": "268566528"
+    },
+    {
+      "name": "Major Aide-de-camp",
+      "color": 15844367,
+      "permissions": "105692739917633"
+    },
+    {
+      "name": "Server Admin",
+      "color": 0,
+      "permissions": "1721826619162623"
+    },
+    {
+      "name": "Lieutenant",
+      "color": 5533306,
+      "permissions": "0"
+    },
+    {
+      "name": "Server Handler",
+      "color": 0,
+      "permissions": "2038494557896703"
+    },
+    {
+      "name": "• Field Grade Officers •",
+      "color": 10341198,
+      "permissions": "0"
+    },
+    {
+      "name": "Strike I",
+      "color": 460551,
+      "permissions": "0"
+    },
+    {
+      "name": "Server Booster",
+      "color": 16023551,
+      "permissions": "422218907582465"
+    },
+    {
+      "name": "• Commissioned Officers •",
+      "color": 12745742,
+      "permissions": "70512662795841"
+    },
+    {
+      "name": "Off-Shift",
+      "color": 0,
+      "permissions": "0"
+    },
+    {
+      "name": "Master Sergeant",
+      "color": 12455438,
+      "permissions": "35321848006401"
+    },
+    {
+      "name": "Ex Developer",
+      "color": 11342935,
+      "permissions": "1721807559716807"
+    },
+    {
+      "name": "Divisionary",
+      "color": 3748456,
+      "permissions": "131072"
+    },
+    {
+      "name": "Phase IV",
+      "color": 15844367,
+      "permissions": "0"
+    },
+    {
+      "name": "Koya",
+      "color": 0,
+      "permissions": "28033251011839"
+    },
+    {
+      "name": "Major",
+      "color": 2123412,
+      "permissions": "131072"
+    },
+    {
+      "name": "@everyone",
+      "color": 0,
+      "permissions": "985306303365697"
+    },
+    {
+      "name": "• Swiss Guards Corps •",
+      "color": 15158332,
+      "permissions": "0"
+    },
+    {
+      "name": "Secretary of War",
+      "color": 2557187,
+      "permissions": "268566528"
+    },
+    {
+      "name": "Discord Me",
+      "color": 0,
+      "permissions": "8796093088769"
+    },
+    {
+      "name": "Permission Bypass",
+      "color": 16117486,
+      "permissions": "131072"
+    },
+    {
+      "name": "Phase I",
+      "color": 1752220,
+      "permissions": "0"
+    },
+    {
+      "name": "Clan Labs",
+      "color": 0,
+      "permissions": "268435464"
+    },
+    {
+      "name": "Phase II",
+      "color": 3066993,
+      "permissions": "0"
+    },
+    {
+      "name": "Anti Link",
+      "color": 0,
+      "permissions": "8"
+    },
+    {
+      "name": "Joint Chiefs of Staff",
+      "color": 3337250,
+      "permissions": "268566528"
+    },
+    {
+      "name": "Clarivex",
+      "color": 0,
+      "permissions": "8"
+    },
+    {
+      "name": "First Lieutenant",
+      "color": 7175370,
+      "permissions": "0"
+    },
+    {
+      "name": "SGC Personnel",
+      "color": 14617612,
+      "permissions": "0"
+    },
+    {
+      "name": "Lieutenant Colonel",
+      "color": 11342935,
+      "permissions": "131072"
+    },
+    {
+      "name": "Community Follower",
+      "color": 10181046,
+      "permissions": "0"
+    },
+    {
+      "name": "Novice",
+      "color": 2998225,
+      "permissions": "0"
+    },
+    {
+      "name": "S.A.D.I",
+      "color": 0,
+      "permissions": "8"
+    },
+    {
+      "name": "bot",
+      "color": 0,
+      "permissions": "1545913348653055"
+    },
+    {
+      "name": "Presidential Ambassador",
+      "color": 15001894,
+      "permissions": "103354092486607"
+    },
+    {
+      "name": "Clanny",
+      "color": 0,
+      "permissions": "275616230464"
+    },
+    {
+      "name": "• Senior Non-Commissioned Officers •",
+      "color": 14280224,
+      "permissions": "0"
+    },
+    {
+      "name": "Green-bot",
+      "color": 0,
+      "permissions": "4331695368"
+    },
+    {
+      "name": "Senior Moderator",
+      "color": 2952374,
+      "permissions": "1721807559716807"
+    },
+    {
+      "name": "Presidential Commander",
+      "color": 3066993,
+      "permissions": "138538465099775"
+    },
+    {
+      "name": "Swiss Guards Corps",
+      "color": 0,
+      "permissions": "8"
+    },
+    {
+      "name": "Update Bypass",
+      "color": 3447003,
+      "permissions": "105697034884673"
+    },
+    {
+      "name": "Inactivity Notice",
+      "color": 657930,
+      "permissions": "0"
+    },
+    {
+      "name": "Protection Unit",
+      "color": 132205,
+      "permissions": "0"
+    },
+    {
+      "name": "• Developer Corps •",
+      "color": 2123412,
+      "permissions": "0"
+    },
+    {
+      "name": "Phase III",
+      "color": 10181046,
+      "permissions": "0"
+    },
+    {
+      "name": "Captain",
+      "color": 1752220,
+      "permissions": "0"
+    },
+    {
+      "name": "Chief Aide-de-camp",
+      "color": 15158332,
+      "permissions": "0"
+    },
+    {
+      "name": "DISBOARD.org",
+      "color": 0,
+      "permissions": "2147486737"
+    },
+    {
+      "name": "Officer Strike II",
+      "color": 263172,
+      "permissions": "0"
+    },
+    {
+      "name": "• High Command •",
+      "color": 5644320,
+      "permissions": "70512662779457"
+    },
+    {
+      "name": "Combat Awards",
+      "color": 10038562,
+      "permissions": "0"
+    },
+    {
+      "name": "Specialist Officers",
+      "color": 9490813,
+      "permissions": "131072"
+    },
+    {
+      "name": "Corps Commander",
+      "color": 7722656,
+      "permissions": "131072"
+    },
+    {
+      "name": "Tickets",
+      "color": 0,
+      "permissions": "395942816984"
+    },
+    {
+      "name": "Strike III",
+      "color": 197379,
+      "permissions": "0"
+    },
+    {
+      "name": "Aide-de-camp",
+      "color": 394758,
+      "permissions": "105692739917633"
+    },
+    {
+      "name": "Swiss Guards Corps",
+      "color": 0,
+      "permissions": "8"
+    },
+    {
+      "name": "Quartermaster",
+      "color": 5533306,
+      "permissions": "0"
+    },
+    {
+      "name": "Dyno",
+      "color": 0,
+      "permissions": "10310055718079"
+    },
+    {
+      "name": "Supreme Allied Commander",
+      "color": 12045339,
+      "permissions": "131072"
+    },
+    {
+      "name": "RoWifi",
+      "color": 0,
+      "permissions": "402738248"
+    },
+    {
+      "name": "Sergeant",
+      "color": 3608052,
+      "permissions": "35326142973441"
+    },
+    {
+      "name": "Sergeant Major",
+      "color": 15442243,
+      "permissions": "0"
+    },
+    {
+      "name": "Weaponary Awards",
+      "color": 15105570,
+      "permissions": "0"
+    },
+    {
+      "name": "Colonel",
+      "color": 14196044,
+      "permissions": "268566528"
+    },
+    {
+      "name": "• Headquarters •",
+      "color": 2039070,
+      "permissions": "105697034884673"
+    },
+    {
+      "name": "Recruiting Command",
+      "color": 3497696,
+      "permissions": "0"
+    },
+    {
+      "name": "2nd Territorial Division",
+      "color": 10038562,
+      "permissions": "0"
+    },
+    {
+      "name": "• Aide-de-Camp Grades •",
+      "color": 15158332,
+      "permissions": "0"
+    },
+    {
+      "name": "Brigadier",
+      "color": 14991450,
+      "permissions": "131072"
+    },
+    {
+      "name": "• Non-Commissioned Officers •",
+      "color": 12828196,
+      "permissions": "0"
+    },
+    {
+      "name": "Medal Of Honor",
+      "color": 15844367,
+      "permissions": "0"
+    },
+    {
+      "name": "• Senior Logistics Team •",
+      "color": 3447003,
+      "permissions": "0"
+    },
+    {
+      "name": "Developer",
+      "color": 12454453,
+      "permissions": "105692739917633"
+    },
+    {
+      "name": "• Company Grade Officers •",
+      "color": 15844367,
+      "permissions": "0"
+    },
+    {
+      "name": "carl-bot",
+      "color": 0,
+      "permissions": "2088234230"
+    },
+    {
+      "name": "Presidential Advisor",
+      "color": 10038562,
+      "permissions": "27519364885831"
+    },
+    {
+      "name": "Tester",
+      "color": 8898802,
+      "permissions": "594807977528897"
+    },
+    {
+      "name": "On-Shift",
+      "color": 0,
+      "permissions": "0"
+    },
+    {
+      "name": "Unverified",
+      "color": 0,
+      "permissions": "2048"
+    },
+    {
+      "name": "Officer Strike III",
+      "color": 394758,
+      "permissions": "0"
+    },
+    {
+      "name": "Administrator",
+      "color": 0,
+      "permissions": "32957699452871"
+    },
+    {
+      "name": "Verified",
+      "color": 0,
+      "permissions": "39719894614592"
+    },
+    {
+      "name": "Engineers",
+      "color": 3489551,
+      "permissions": "4400194175040"
+    },
+    {
+      "name": "• Logistics Team •",
+      "color": 7515088,
+      "permissions": "0"
+    },
+    {
+      "name": "• Community Staff •",
+      "color": 3746655,
+      "permissions": "105697034880577"
+    },
+    {
+      "name": "• Engineer Corps •",
+      "color": 3447003,
+      "permissions": "0"
+    },
+    {
+      "name": "Officer Strike I",
+      "color": 460551,
+      "permissions": "0"
+    },
+    {
+      "name": "========",
+      "color": 0,
+      "permissions": "0"
+    },
+    {
+      "name": "Staff Roles--------------------------------------------------------------",
+      "color": 0,
+      "permissions": "0"
+    },
+    {
+      "name": "Soldier",
+      "color": 1752220,
+      "permissions": "137439219712"
+    },
+    {
+      "name": "• General Officers •",
+      "color": 10038562,
+      "permissions": "0"
+    },
+    {
+      "name": "Citizen",
+      "color": 1693327,
+      "permissions": "105697034704385"
+    },
+    {
+      "name": "Trainings Awards",
+      "color": 3447003,
+      "permissions": "0"
+    },
+    {
+      "name": "17th Parachute Division",
+      "color": 1146986,
+      "permissions": "0"
+    },
+    {
+      "name": "Ranking Access",
+      "color": 4790987,
+      "permissions": "268435456"
+    },
+    {
+      "name": "• Instructor •",
+      "color": 10038562,
+      "permissions": "0"
+    },
+    {
+      "name": "Server Booster",
+      "color": 11342935,
+      "permissions": "31858024107585"
+    },
+    {
+      "name": "Moderator",
+      "color": 3197886,
+      "permissions": "120915945324487"
+    },
+    {
+      "name": "Master Sergeant Major",
+      "color": 4800833,
+      "permissions": "105692739671809"
+    }
+  ],
+  "channels": [
+    {
+      "name": "🗣》𝒄𝒐𝒎𝒎𝒖𝒏𝒊𝒕𝒚",
+      "type": 0,
+      "parentId": "1126159600698281995",
+      "permissionOverwrites": [
+        {
+          "id": "1181302501379690547",
+          "type": 0,
+          "allow": "0",
+          "deny": "0"
+        },
+        {
+          "id": "1126208041575002173",
+          "type": 0,
+          "allow": "68672",
+          "deny": "0"
+        },
+        {
+          "id": "1126421978702680095",
+          "type": 0,
+          "allow": "0",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "562949953455104",
+          "deny": "2112"
+        },
+        {
+          "id": "1210323927096762448",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1126253508052668506",
+          "type": 0,
+          "allow": "562949953472576",
+          "deny": "0"
+        },
+        {
+          "id": "1126249320757346394",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1181300252117057556",
+          "type": 0,
+          "allow": "0",
+          "deny": "0"
+        },
+        {
+          "id": "1209541127804559451",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1128009517033062410",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1237021618145071124",
+          "type": 0,
+          "allow": "0",
+          "deny": "0"
+        },
+        {
+          "id": "1181306475956670474",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1265672520288309361",
+          "type": 0,
+          "allow": "2112",
+          "deny": "0"
+        },
+        {
+          "id": "1126085563632590859",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        },
+        {
+          "id": "1126257116445941810",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        },
+        {
+          "id": "1167812938355187752",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1126257371719676105",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        }
+      ]
+    },
+    {
+      "name": "|------MODERATION CHANNELS------|",
+      "type": 4,
+      "parentId": null,
+      "permissionOverwrites": []
+    },
+    {
+      "name": "🤝》𝒑𝒂𝒓𝒕𝒏𝒆𝒓𝒔𝒉𝒊𝒑",
+      "type": 0,
+      "parentId": "1126159600698281995",
+      "permissionOverwrites": [
+        {
+          "id": "1126421978702680095",
+          "type": 0,
+          "allow": "0",
+          "deny": "0"
+        },
+        {
+          "id": "1126208041575002173",
+          "type": 0,
+          "allow": "67584",
+          "deny": "0"
+        },
+        {
+          "id": "1126187628530774117",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "1024",
+          "deny": "2048"
+        },
+        {
+          "id": "1126085563632590859",
+          "type": 0,
+          "allow": "65536",
+          "deny": "2048"
+        },
+        {
+          "id": "1126176018848284673",
+          "type": 0,
+          "allow": "0",
+          "deny": "0"
+        },
+        {
+          "id": "1126257116445941810",
+          "type": 0,
+          "allow": "67584",
+          "deny": "0"
+        },
+        {
+          "id": "1167812938355187752",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1126257371719676105",
+          "type": 0,
+          "allow": "67584",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "》𝒊𝒏𝒂𝒄𝒕𝒊𝒗𝒊𝒕𝒚-𝒏𝒐𝒕𝒊𝒄𝒆𝒔",
+      "type": 0,
+      "parentId": "1221128159039062076",
+      "permissionOverwrites": []
+    },
+    {
+      "name": "🔗》𝒍𝒊𝒏𝒌𝒔",
+      "type": 0,
+      "parentId": "1126077426842214481",
+      "permissionOverwrites": [
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "1024",
+          "deny": "2048"
+        },
+        {
+          "id": "1126182951126827118",
+          "type": 0,
+          "allow": "3072",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "🎟》𝒕𝒊𝒄𝒌𝒆𝒕",
+      "type": 0,
+      "parentId": "1126091739028013106",
+      "permissionOverwrites": [
+        {
+          "id": "1126187628530774117",
+          "type": 0,
+          "allow": "128637289889617",
+          "deny": "4294967296"
+        },
+        {
+          "id": "1126208041575002173",
+          "type": 0,
+          "allow": "128619279548225",
+          "deny": "0"
+        },
+        {
+          "id": "1126251734164066374",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "3072"
+        },
+        {
+          "id": "1126421978702680095",
+          "type": 0,
+          "allow": "198657",
+          "deny": "1024"
+        },
+        {
+          "id": "1126182951126827118",
+          "type": 0,
+          "allow": "0",
+          "deny": "3072"
+        },
+        {
+          "id": "1128009108725977129",
+          "type": 0,
+          "allow": "202753",
+          "deny": "1024"
+        },
+        {
+          "id": "1188873535385509979",
+          "type": 0,
+          "allow": "0",
+          "deny": "1024"
+        },
+        {
+          "id": "1126105165720719420",
+          "type": 0,
+          "allow": "198657",
+          "deny": "1024"
+        },
+        {
+          "id": "1220442645503934574",
+          "type": 0,
+          "allow": "0",
+          "deny": "1024"
+        },
+        {
+          "id": "1126176018848284673",
+          "type": 0,
+          "allow": "378762751057",
+          "deny": "0"
+        },
+        {
+          "id": "1126254878767976448",
+          "type": 0,
+          "allow": "198657",
+          "deny": "1024"
+        },
+        {
+          "id": "1126253508052668506",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126249320757346394",
+          "type": 0,
+          "allow": "198657",
+          "deny": "1024"
+        },
+        {
+          "id": "1128009517033062410",
+          "type": 0,
+          "allow": "198657",
+          "deny": "1024"
+        },
+        {
+          "id": "1126252984427352184",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1128718016650158153",
+          "type": 0,
+          "allow": "131072",
+          "deny": "1024"
+        },
+        {
+          "id": "1126085563632590859",
+          "type": 0,
+          "allow": "65536",
+          "deny": "3072"
+        },
+        {
+          "id": "1126249313090154536",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1128008872032997576",
+          "type": 0,
+          "allow": "198657",
+          "deny": "1024"
+        },
+        {
+          "id": "1126257116445941810",
+          "type": 0,
+          "allow": "198657",
+          "deny": "1024"
+        },
+        {
+          "id": "1126257371719676105",
+          "type": 0,
+          "allow": "198657",
+          "deny": "1024"
+        }
+      ]
+    },
+    {
+      "name": "🏆》𝑫𝒊𝒗𝒊𝒔𝒊𝒐𝒏-𝑰𝒏𝒇𝒐𝒓𝒎𝒂𝒕𝒊𝒐𝒏",
+      "type": 0,
+      "parentId": "1126203667847057550",
+      "permissionOverwrites": [
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "65536",
+          "deny": "2048"
+        },
+        {
+          "id": "1126182951126827118",
+          "type": 0,
+          "allow": "0",
+          "deny": "2048"
+        },
+        {
+          "id": "1167812938355187752",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "officers-chat",
+      "type": 0,
+      "parentId": "1259522009155633222",
+      "permissionOverwrites": [
+        {
+          "id": "1126249313090154536",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126251734164066374",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "1024"
+        },
+        {
+          "id": "1126252984427352184",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1209541127804559451",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1167812938355187752",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "|------talk channel------|",
+      "type": 4,
+      "parentId": null,
+      "permissionOverwrites": [
+        {
+          "id": "1126421978702680095",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126208041575002173",
+          "type": 0,
+          "allow": "128619279548225",
+          "deny": "0"
+        },
+        {
+          "id": "1126251734164066374",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126187628530774117",
+          "type": 0,
+          "allow": "128637289889617",
+          "deny": "4294967296"
+        },
+        {
+          "id": "1126182951126827118",
+          "type": 0,
+          "allow": "0",
+          "deny": "2048"
+        },
+        {
+          "id": "1128009108725977129",
+          "type": 0,
+          "allow": "203777",
+          "deny": "0"
+        },
+        {
+          "id": "1126105165720719420",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126176018848284673",
+          "type": 0,
+          "allow": "378762751057",
+          "deny": "0"
+        },
+        {
+          "id": "1126254878767976448",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126253508052668506",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126249320757346394",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1128009517033062410",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126252984427352184",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1128718016650158153",
+          "type": 0,
+          "allow": "131072",
+          "deny": "0"
+        },
+        {
+          "id": "1126085563632590859",
+          "type": 0,
+          "allow": "68608",
+          "deny": "0"
+        },
+        {
+          "id": "1126249313090154536",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1128008872032997576",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126257116445941810",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126257371719676105",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "⬆᲼》𝒔𝒆𝒓𝒗𝒆𝒓-𝒃𝒐𝒐𝒔𝒕𝒔",
+      "type": 0,
+      "parentId": "1126091739028013106",
+      "permissionOverwrites": [
+        {
+          "id": "1126187628530774117",
+          "type": 0,
+          "allow": "128637289889617",
+          "deny": "4294967296"
+        },
+        {
+          "id": "1126208041575002173",
+          "type": 0,
+          "allow": "128619279548225",
+          "deny": "0"
+        },
+        {
+          "id": "1126251734164066374",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "2048"
+        },
+        {
+          "id": "1126421978702680095",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126182951126827118",
+          "type": 0,
+          "allow": "0",
+          "deny": "2048"
+        },
+        {
+          "id": "1128009108725977129",
+          "type": 0,
+          "allow": "203777",
+          "deny": "0"
+        },
+        {
+          "id": "1126105165720719420",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126253508052668506",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126254878767976448",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126176018848284673",
+          "type": 0,
+          "allow": "378762751057",
+          "deny": "0"
+        },
+        {
+          "id": "1126249320757346394",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1128009517033062410",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126252984427352184",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1128718016650158153",
+          "type": 0,
+          "allow": "131072",
+          "deny": "0"
+        },
+        {
+          "id": "1126085563632590859",
+          "type": 0,
+          "allow": "68608",
+          "deny": "0"
+        },
+        {
+          "id": "1126249313090154536",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1128008872032997576",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126257116445941810",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126257371719676105",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "demotion-logs",
+      "type": 0,
+      "parentId": "1259522009155633222",
+      "permissionOverwrites": [
+        {
+          "id": "1181302501379690547",
+          "type": 0,
+          "allow": "1049600",
+          "deny": "0"
+        },
+        {
+          "id": "1126252984427352184",
+          "type": 0,
+          "allow": "1049600",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "1048576"
+        },
+        {
+          "id": "1126251734164066374",
+          "type": 0,
+          "allow": "1049600",
+          "deny": "0"
+        },
+        {
+          "id": "1126249313090154536",
+          "type": 0,
+          "allow": "1049600",
+          "deny": "0"
+        },
+        {
+          "id": "1209541127804559451",
+          "type": 0,
+          "allow": "1049600",
+          "deny": "0"
+        },
+        {
+          "id": "1167812938355187752",
+          "type": 0,
+          "allow": "1049600",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "🔔》𝒕𝒓𝒂𝒊𝒏𝒊𝒏𝒈-𝒏𝒐𝒕𝒊𝒇𝒊𝒄𝒂𝒕𝒊𝒐𝒏𝒔",
+      "type": 5,
+      "parentId": "1126203667847057550",
+      "permissionOverwrites": [
+        {
+          "id": "1126421978702680095",
+          "type": 0,
+          "allow": "65536",
+          "deny": "2048"
+        },
+        {
+          "id": "1167814059857559562",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1126251734164066374",
+          "type": 0,
+          "allow": "0",
+          "deny": "2048"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "2048"
+        },
+        {
+          "id": "1181302501379690547",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1181300740677972061",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1128009108725977129",
+          "type": 0,
+          "allow": "0",
+          "deny": "0"
+        },
+        {
+          "id": "1126105165720719420",
+          "type": 0,
+          "allow": "0",
+          "deny": "0"
+        },
+        {
+          "id": "1126176018848284673",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1126254878767976448",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1137805330814873670",
+          "type": 0,
+          "allow": "0",
+          "deny": "0"
+        },
+        {
+          "id": "1126249320757346394",
+          "type": 0,
+          "allow": "0",
+          "deny": "2048"
+        },
+        {
+          "id": "1126253508052668506",
+          "type": 0,
+          "allow": "0",
+          "deny": "0"
+        },
+        {
+          "id": "1126252984427352184",
+          "type": 0,
+          "allow": "0",
+          "deny": "0"
+        },
+        {
+          "id": "1181306475956670474",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1012211131248549918",
+          "type": 1,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1167813510890270821",
+          "type": 0,
+          "allow": "0",
+          "deny": "2048"
+        },
+        {
+          "id": "1126187628530774117",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1126208041575002173",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1181301335677747322",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1181300252117057556",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1128009517033062410",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1265672520288309361",
+          "type": 0,
+          "allow": "165888",
+          "deny": "0"
+        },
+        {
+          "id": "1167813759729942628",
+          "type": 0,
+          "allow": "0",
+          "deny": "2048"
+        },
+        {
+          "id": "1126249313090154536",
+          "type": 0,
+          "allow": "0",
+          "deny": "0"
+        },
+        {
+          "id": "1128008872032997576",
+          "type": 0,
+          "allow": "0",
+          "deny": "0"
+        },
+        {
+          "id": "1126257116445941810",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1167812938355187752",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1126257371719676105",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "✅》𝒗𝒆𝒓𝒊𝒇𝒚",
+      "type": 0,
+      "parentId": "1126077426842214481",
+      "permissionOverwrites": [
+        {
+          "id": "1128718014741753867",
+          "type": 0,
+          "allow": "3072",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "2048",
+          "deny": "1024"
+        },
+        {
+          "id": "1126182951126827118",
+          "type": 0,
+          "allow": "3072",
+          "deny": "0"
+        },
+        {
+          "id": "1126085563632590859",
+          "type": 0,
+          "allow": "2048",
+          "deny": "1024"
+        }
+      ]
+    },
+    {
+      "name": "sadi-logs",
+      "type": 0,
+      "parentId": "1126426585281597560",
+      "permissionOverwrites": [
+        {
+          "id": "1126187628530774117",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "1024"
+        },
+        {
+          "id": "1209541127804559451",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1167812938355187752",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "xp-logs",
+      "type": 0,
+      "parentId": "1259522009155633222",
+      "permissionOverwrites": [
+        {
+          "id": "1126249313090154536",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126251734164066374",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "1024"
+        },
+        {
+          "id": "1126252984427352184",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1209541127804559451",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1167812938355187752",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "》𝑮𝒆𝒏𝒆𝒓𝒂𝒍-𝒗𝒐𝒊𝒄𝒆-𝒄𝒉𝒂𝒕",
+      "type": 2,
+      "parentId": "1126091739028013106",
+      "permissionOverwrites": [
+        {
+          "id": "1126187628530774117",
+          "type": 0,
+          "allow": "128637289889617",
+          "deny": "4294967296"
+        },
+        {
+          "id": "1126208041575002173",
+          "type": 0,
+          "allow": "128619279548225",
+          "deny": "0"
+        },
+        {
+          "id": "1126251734164066374",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126421978702680095",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126182951126827118",
+          "type": 0,
+          "allow": "0",
+          "deny": "2048"
+        },
+        {
+          "id": "1128009108725977129",
+          "type": 0,
+          "allow": "203777",
+          "deny": "0"
+        },
+        {
+          "id": "1126105165720719420",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126176018848284673",
+          "type": 0,
+          "allow": "378762751057",
+          "deny": "0"
+        },
+        {
+          "id": "1126254878767976448",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126253508052668506",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126249320757346394",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1128009517033062410",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126252984427352184",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1128718016650158153",
+          "type": 0,
+          "allow": "131072",
+          "deny": "0"
+        },
+        {
+          "id": "1126085563632590859",
+          "type": 0,
+          "allow": "68608",
+          "deny": "0"
+        },
+        {
+          "id": "1126249313090154536",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1128008872032997576",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126257116445941810",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126257371719676105",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "》𝒎𝒆𝒅𝒊𝒂-𝒄𝒉𝒂𝒏𝒏𝒆𝒍",
+      "type": 0,
+      "parentId": "1126159600698281995",
+      "permissionOverwrites": [
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "32768",
+          "deny": "1024"
+        },
+        {
+          "id": "1126085563632590859",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "ranking-logs",
+      "type": 0,
+      "parentId": "1259522009155633222",
+      "permissionOverwrites": [
+        {
+          "id": "1126187628530774117",
+          "type": 0,
+          "allow": "0",
+          "deny": "0"
+        },
+        {
+          "id": "1181302501379690547",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126252984427352184",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "1024"
+        },
+        {
+          "id": "1126251734164066374",
+          "type": 0,
+          "allow": "3072",
+          "deny": "0"
+        },
+        {
+          "id": "1126249313090154536",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1209541127804559451",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1167812938355187752",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "🤖》𝒃𝒐𝒕-𝒄𝒐𝒎𝒎𝒂𝒏𝒅𝒔",
+      "type": 0,
+      "parentId": "1126159600698281995",
+      "permissionOverwrites": [
+        {
+          "id": "1128009517033062410",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126208041575002173",
+          "type": 0,
+          "allow": "68608",
+          "deny": "0"
+        },
+        {
+          "id": "1126252984427352184",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "2147485696",
+          "deny": "0"
+        },
+        {
+          "id": "1370488208646733877",
+          "type": 0,
+          "allow": "1760303889513553",
+          "deny": "0"
+        },
+        {
+          "id": "1126182951126827118",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1126421978702680095",
+          "type": 0,
+          "allow": "0",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "|------NOTICES------|",
+      "type": 4,
+      "parentId": null,
+      "permissionOverwrites": []
+    },
+    {
+      "name": "💡》𝒊𝒅𝒆𝒂𝒔",
+      "type": 0,
+      "parentId": "1126091739028013106",
+      "permissionOverwrites": [
+        {
+          "id": "1126187628530774117",
+          "type": 0,
+          "allow": "128637289889617",
+          "deny": "4294967296"
+        },
+        {
+          "id": "1126208041575002173",
+          "type": 0,
+          "allow": "128619279548225",
+          "deny": "0"
+        },
+        {
+          "id": "1126251734164066374",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126421978702680095",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126182951126827118",
+          "type": 0,
+          "allow": "0",
+          "deny": "2048"
+        },
+        {
+          "id": "1128009108725977129",
+          "type": 0,
+          "allow": "203777",
+          "deny": "0"
+        },
+        {
+          "id": "1126105165720719420",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126176018848284673",
+          "type": 0,
+          "allow": "378762751057",
+          "deny": "0"
+        },
+        {
+          "id": "1126254878767976448",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126253508052668506",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126249320757346394",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1128009517033062410",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126252984427352184",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1128718016650158153",
+          "type": 0,
+          "allow": "131072",
+          "deny": "0"
+        },
+        {
+          "id": "1126085563632590859",
+          "type": 0,
+          "allow": "68608",
+          "deny": "0"
+        },
+        {
+          "id": "1126249313090154536",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1128008872032997576",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126257116445941810",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126257371719676105",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "transcripts",
+      "type": 0,
+      "parentId": "1126091739028013106",
+      "permissionOverwrites": [
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "1024"
+        },
+        {
+          "id": "1209541127804559451",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1167812938355187752",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "adonis-commands-logs",
+      "type": 0,
+      "parentId": "1126426585281597560",
+      "permissionOverwrites": [
+        {
+          "id": "1126187628530774117",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "1024"
+        },
+        {
+          "id": "1209541127804559451",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "join-leave-logs",
+      "type": 0,
+      "parentId": "1126426585281597560",
+      "permissionOverwrites": [
+        {
+          "id": "1126187628530774117",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "1024"
+        },
+        {
+          "id": "1209541127804559451",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "᲼》𝒆𝒗𝒆𝒏𝒕-𝒂𝒏𝒏𝒐𝒖𝒏𝒄𝒆𝒎𝒆𝒏𝒕𝒔",
+      "type": 5,
+      "parentId": "1126091739028013106",
+      "permissionOverwrites": [
+        {
+          "id": "1126187628530774117",
+          "type": 0,
+          "allow": "128637289889617",
+          "deny": "4294967296"
+        },
+        {
+          "id": "1126208041575002173",
+          "type": 0,
+          "allow": "128619279548225",
+          "deny": "0"
+        },
+        {
+          "id": "1126251734164066374",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "131072",
+          "deny": "2048"
+        },
+        {
+          "id": "1126421978702680095",
+          "type": 0,
+          "allow": "197633",
+          "deny": "2048"
+        },
+        {
+          "id": "1128009108725977129",
+          "type": 0,
+          "allow": "201729",
+          "deny": "2048"
+        },
+        {
+          "id": "1126105165720719420",
+          "type": 0,
+          "allow": "197633",
+          "deny": "2048"
+        },
+        {
+          "id": "1126176018848284673",
+          "type": 0,
+          "allow": "378762751057",
+          "deny": "0"
+        },
+        {
+          "id": "1126254878767976448",
+          "type": 0,
+          "allow": "197633",
+          "deny": "2048"
+        },
+        {
+          "id": "1126253508052668506",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126249320757346394",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1128009517033062410",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1265672520288309361",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1126252984427352184",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1128718016650158153",
+          "type": 0,
+          "allow": "131072",
+          "deny": "0"
+        },
+        {
+          "id": "1126085563632590859",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        },
+        {
+          "id": "1126249313090154536",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1128008872032997576",
+          "type": 0,
+          "allow": "197633",
+          "deny": "2048"
+        },
+        {
+          "id": "1126257116445941810",
+          "type": 0,
+          "allow": "197633",
+          "deny": "2048"
+        },
+        {
+          "id": "1126257371719676105",
+          "type": 0,
+          "allow": "197633",
+          "deny": "2048"
+        }
+      ]
+    },
+    {
+      "name": "SGC | Nominations",
+      "type": 4,
+      "parentId": null,
+      "permissionOverwrites": [
+        {
+          "id": "1126187628530774117",
+          "type": 0,
+          "allow": "68608",
+          "deny": "0"
+        },
+        {
+          "id": "1126208041575002173",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        },
+        {
+          "id": "1126251734164066374",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "1024"
+        },
+        {
+          "id": "1126421978702680095",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        },
+        {
+          "id": "1128009108725977129",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        },
+        {
+          "id": "1126105165720719420",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        },
+        {
+          "id": "1126253508052668506",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        },
+        {
+          "id": "1126254878767976448",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        },
+        {
+          "id": "1126176018848284673",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126249320757346394",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        },
+        {
+          "id": "1128009517033062410",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        },
+        {
+          "id": "1012211131248549918",
+          "type": 1,
+          "allow": "268435472",
+          "deny": "0"
+        },
+        {
+          "id": "1126252984427352184",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        },
+        {
+          "id": "1126085563632590859",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        },
+        {
+          "id": "1126249313090154536",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        },
+        {
+          "id": "1128008872032997576",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        },
+        {
+          "id": "1126257116445941810",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        },
+        {
+          "id": "1126257371719676105",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        }
+      ]
+    },
+    {
+      "name": "🔗》𝒋𝒐𝒊𝒏-𝒍𝒐𝒈𝒔",
+      "type": 0,
+      "parentId": "1126091739028013106",
+      "permissionOverwrites": [
+        {
+          "id": "1126187628530774117",
+          "type": 0,
+          "allow": "128637289889617",
+          "deny": "4294967296"
+        },
+        {
+          "id": "1126208041575002173",
+          "type": 0,
+          "allow": "128619279546177",
+          "deny": "0"
+        },
+        {
+          "id": "1126251734164066374",
+          "type": 0,
+          "allow": "197633",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "1024",
+          "deny": "2048"
+        },
+        {
+          "id": "1126421978702680095",
+          "type": 0,
+          "allow": "197633",
+          "deny": "0"
+        },
+        {
+          "id": "1128009108725977129",
+          "type": 0,
+          "allow": "201729",
+          "deny": "0"
+        },
+        {
+          "id": "1128718014741753867",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        },
+        {
+          "id": "1126105165720719420",
+          "type": 0,
+          "allow": "197633",
+          "deny": "0"
+        },
+        {
+          "id": "1126253508052668506",
+          "type": 0,
+          "allow": "197633",
+          "deny": "0"
+        },
+        {
+          "id": "1126254878767976448",
+          "type": 0,
+          "allow": "197633",
+          "deny": "0"
+        },
+        {
+          "id": "1126176018848284673",
+          "type": 0,
+          "allow": "378762751057",
+          "deny": "0"
+        },
+        {
+          "id": "1126249320757346394",
+          "type": 0,
+          "allow": "197633",
+          "deny": "0"
+        },
+        {
+          "id": "1128009517033062410",
+          "type": 0,
+          "allow": "197633",
+          "deny": "0"
+        },
+        {
+          "id": "1126252984427352184",
+          "type": 0,
+          "allow": "197633",
+          "deny": "0"
+        },
+        {
+          "id": "1128718016650158153",
+          "type": 0,
+          "allow": "131072",
+          "deny": "0"
+        },
+        {
+          "id": "1126085563632590859",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        },
+        {
+          "id": "1126249313090154536",
+          "type": 0,
+          "allow": "197633",
+          "deny": "0"
+        },
+        {
+          "id": "1128008872032997576",
+          "type": 0,
+          "allow": "197633",
+          "deny": "0"
+        },
+        {
+          "id": "1126257116445941810",
+          "type": 0,
+          "allow": "197633",
+          "deny": "0"
+        },
+        {
+          "id": "1126257371719676105",
+          "type": 0,
+          "allow": "197632",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "chat-logs",
+      "type": 0,
+      "parentId": "1126426585281597560",
+      "permissionOverwrites": [
+        {
+          "id": "1126187628530774117",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "1024"
+        },
+        {
+          "id": "1209541127804559451",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "📣᲼》𝒎𝒐𝒅𝒆𝒓𝒂𝒕𝒐𝒓-𝒂𝒏𝒏𝒐𝒖𝒏𝒄𝒆𝒎𝒆𝒏𝒕𝒔",
+      "type": 0,
+      "parentId": "1126426585281597560",
+      "permissionOverwrites": [
+        {
+          "id": "1126208041575002173",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "1024"
+        }
+      ]
+    },
+    {
+      "name": "》𝒑𝒓𝒐𝒑𝒂𝒈𝒂𝒏𝒅𝒂",
+      "type": 0,
+      "parentId": "1126159600698281995",
+      "permissionOverwrites": [
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "32768",
+          "deny": "1024"
+        },
+        {
+          "id": "1126085563632590859",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "personnel-dismissals",
+      "type": 0,
+      "parentId": "1259522009155633222",
+      "permissionOverwrites": [
+        {
+          "id": "1181302501379690547",
+          "type": 0,
+          "allow": "1051648",
+          "deny": "0"
+        },
+        {
+          "id": "1126252984427352184",
+          "type": 0,
+          "allow": "1051648",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "131072",
+          "deny": "1051648"
+        },
+        {
+          "id": "1126251734164066374",
+          "type": 0,
+          "allow": "1049600",
+          "deny": "0"
+        },
+        {
+          "id": "1126249313090154536",
+          "type": 0,
+          "allow": "1049600",
+          "deny": "2048"
+        },
+        {
+          "id": "1220442645503934574",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1209541127804559451",
+          "type": 0,
+          "allow": "1051648",
+          "deny": "0"
+        },
+        {
+          "id": "1167812938355187752",
+          "type": 0,
+          "allow": "1051648",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "🎭》𝒄𝒉𝒂𝒊𝒏-𝒐𝒇-𝒄𝒐𝒎𝒎𝒂𝒏𝒅",
+      "type": 0,
+      "parentId": "1126203667847057550",
+      "permissionOverwrites": [
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "65536",
+          "deny": "2048"
+        },
+        {
+          "id": "1126182951126827118",
+          "type": 0,
+          "allow": "0",
+          "deny": "2048"
+        },
+        {
+          "id": "1197955948774428723",
+          "type": 1,
+          "allow": "2048",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "》𝒎𝒆𝒎𝒃𝒆𝒓-𝒄𝒐𝒖𝒏𝒕",
+      "type": 0,
+      "parentId": "1126159600698281995",
+      "permissionOverwrites": [
+        {
+          "id": "1126421978702680095",
+          "type": 0,
+          "allow": "0",
+          "deny": "0"
+        },
+        {
+          "id": "1126208041575002173",
+          "type": 0,
+          "allow": "68608",
+          "deny": "0"
+        },
+        {
+          "id": "1126085563632590859",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "2048"
+        },
+        {
+          "id": "1126257116445941810",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        },
+        {
+          "id": "1126257371719676105",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        }
+      ]
+    },
+    {
+      "name": "❓》𝒄𝒐𝒎𝒎𝒂𝒏𝒅𝒔-𝒊𝒏𝒇𝒐𝒓𝒎𝒂𝒕𝒊𝒐𝒏",
+      "type": 0,
+      "parentId": "1126159600698281995",
+      "permissionOverwrites": [
+        {
+          "id": "1126421978702680095",
+          "type": 0,
+          "allow": "0",
+          "deny": "0"
+        },
+        {
+          "id": "1167812218801365043",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126251734164066374",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "1024"
+        },
+        {
+          "id": "1126208041575002173",
+          "type": 0,
+          "allow": "68608",
+          "deny": "0"
+        },
+        {
+          "id": "1167812016388444360",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1128009108725977129",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        },
+        {
+          "id": "1126105165720719420",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        },
+        {
+          "id": "1167812101662838905",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126253508052668506",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126254878767976448",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        },
+        {
+          "id": "1137805330814873670",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126249320757346394",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1128009517033062410",
+          "type": 0,
+          "allow": "68608",
+          "deny": "0"
+        },
+        {
+          "id": "1126252984427352184",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1167812304662974554",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126249313090154536",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1128008872032997576",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        },
+        {
+          "id": "1126257116445941810",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        },
+        {
+          "id": "1126257371719676105",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        }
+      ]
+    },
+    {
+      "name": "award-logs",
+      "type": 0,
+      "parentId": "1259522009155633222",
+      "permissionOverwrites": [
+        {
+          "id": "1181302501379690547",
+          "type": 0,
+          "allow": "1049600",
+          "deny": "0"
+        },
+        {
+          "id": "1126252984427352184",
+          "type": 0,
+          "allow": "1049600",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "1024",
+          "deny": "1050624"
+        },
+        {
+          "id": "1126251734164066374",
+          "type": 0,
+          "allow": "1049600",
+          "deny": "0"
+        },
+        {
+          "id": "1126249313090154536",
+          "type": 0,
+          "allow": "1051648",
+          "deny": "0"
+        },
+        {
+          "id": "1209541127804559451",
+          "type": 0,
+          "allow": "1049600",
+          "deny": "0"
+        },
+        {
+          "id": "1167812938355187752",
+          "type": 0,
+          "allow": "1049600",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "dyno-logs",
+      "type": 0,
+      "parentId": "1126426585281597560",
+      "permissionOverwrites": [
+        {
+          "id": "1126208041575002173",
+          "type": 0,
+          "allow": "0",
+          "deny": "1024"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "1024"
+        },
+        {
+          "id": "1209541127804559451",
+          "type": 0,
+          "allow": "1024",
+          "deny": "2048"
+        }
+      ]
+    },
+    {
+      "name": "📊》𝒍𝒆𝒂𝒅𝒆𝒓𝒃𝒐𝒂𝒓𝒅",
+      "type": 0,
+      "parentId": "1126159600698281995",
+      "permissionOverwrites": [
+        {
+          "id": "1126421978702680095",
+          "type": 0,
+          "allow": "0",
+          "deny": "0"
+        },
+        {
+          "id": "1126208041575002173",
+          "type": 0,
+          "allow": "68608",
+          "deny": "0"
+        },
+        {
+          "id": "1181306475956670474",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "2048"
+        },
+        {
+          "id": "1181302501379690547",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1265672520288309361",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1210323927096762448",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1126085563632590859",
+          "type": 0,
+          "allow": "68608",
+          "deny": "0"
+        },
+        {
+          "id": "1126257116445941810",
+          "type": 0,
+          "allow": "68608",
+          "deny": "0"
+        },
+        {
+          "id": "1126257371719676105",
+          "type": 0,
+          "allow": "68608",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "❗》𝒓𝒖𝒍𝒆𝒔",
+      "type": 0,
+      "parentId": "1126077426842214481",
+      "permissionOverwrites": [
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        }
+      ]
+    },
+    {
+      "name": "》𝒅𝒊𝒔𝒄𝒉𝒂𝒓𝒈𝒆-𝒓𝒆𝒒𝒖𝒆𝒔𝒕𝒆𝒔",
+      "type": 0,
+      "parentId": "1221128159039062076",
+      "permissionOverwrites": []
+    },
+    {
+      "name": "👍》𝒇𝒆𝒆𝒅𝒃𝒂𝒄𝒌",
+      "type": 15,
+      "parentId": "1126091739028013106",
+      "permissionOverwrites": [
+        {
+          "id": "1126421978702680095",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126208041575002173",
+          "type": 0,
+          "allow": "128619279548225",
+          "deny": "0"
+        },
+        {
+          "id": "1126251734164066374",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126187628530774117",
+          "type": 0,
+          "allow": "128637289889617",
+          "deny": "4294967296"
+        },
+        {
+          "id": "1126182951126827118",
+          "type": 0,
+          "allow": "0",
+          "deny": "2048"
+        },
+        {
+          "id": "1128009108725977129",
+          "type": 0,
+          "allow": "203777",
+          "deny": "0"
+        },
+        {
+          "id": "1126105165720719420",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126253508052668506",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126254878767976448",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126176018848284673",
+          "type": 0,
+          "allow": "378762751057",
+          "deny": "0"
+        },
+        {
+          "id": "1126249320757346394",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1128009517033062410",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126252984427352184",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1128718016650158153",
+          "type": 0,
+          "allow": "131072",
+          "deny": "0"
+        },
+        {
+          "id": "1126085563632590859",
+          "type": 0,
+          "allow": "68608",
+          "deny": "0"
+        },
+        {
+          "id": "1126249313090154536",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1128008872032997576",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126257116445941810",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126257371719676105",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "fortnitian-logs",
+      "type": 0,
+      "parentId": "1259522009155633222",
+      "permissionOverwrites": [
+        {
+          "id": "1126249320757346394",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1181306475956670474",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "1024"
+        },
+        {
+          "id": "1210323927096762448",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1184442017548349520",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1167812938355187752",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1209541127804559451",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "》𝒎𝒆𝒎𝒆",
+      "type": 0,
+      "parentId": "1126159600698281995",
+      "permissionOverwrites": [
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "32832",
+          "deny": "1024"
+        },
+        {
+          "id": "1126085563632590859",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "❓》𝑯𝒐𝒘-𝒕𝒐-𝒗𝒆𝒓𝒊𝒇𝒚",
+      "type": 0,
+      "parentId": "1126077426842214481",
+      "permissionOverwrites": [
+        {
+          "id": "1126182951126827118",
+          "type": 0,
+          "allow": "3072",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "2048"
+        }
+      ]
+    },
+    {
+      "name": "》𝒘𝒆𝒍𝒄𝒐𝒎𝒆",
+      "type": 0,
+      "parentId": "1126077426842214481",
+      "permissionOverwrites": [
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "18432"
+        },
+        {
+          "id": "1126182951126827118",
+          "type": 0,
+          "allow": "3072",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "🤖》𝒔𝒕𝒂𝒇𝒇-𝒄𝒐𝒎𝒎𝒂𝒏𝒅𝒔",
+      "type": 0,
+      "parentId": "1126159600698281995",
+      "permissionOverwrites": [
+        {
+          "id": "1126421978702680095",
+          "type": 0,
+          "allow": "0",
+          "deny": "0"
+        },
+        {
+          "id": "1167812218801365043",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126251734164066374",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "0"
+        },
+        {
+          "id": "1126257371719676105",
+          "type": 0,
+          "allow": "68608",
+          "deny": "0"
+        },
+        {
+          "id": "1126208041575002173",
+          "type": 0,
+          "allow": "68608",
+          "deny": "0"
+        },
+        {
+          "id": "1128009108725977129",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126105165720719420",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1167812101662838905",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126253508052668506",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126254878767976448",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126249320757346394",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1128009517033062410",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126252984427352184",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1167812304662974554",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126249313090154536",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126257116445941810",
+          "type": 0,
+          "allow": "68608",
+          "deny": "0"
+        },
+        {
+          "id": "508968886998269962",
+          "type": 1,
+          "allow": "0",
+          "deny": "0"
+        },
+        {
+          "id": "1167813510890270821",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1167812016388444360",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "SGC | Voice Chat",
+      "type": 4,
+      "parentId": null,
+      "permissionOverwrites": []
+    },
+    {
+      "name": "blacklist-logs",
+      "type": 0,
+      "parentId": "1259522009155633222",
+      "permissionOverwrites": [
+        {
+          "id": "1126249313090154536",
+          "type": 0,
+          "allow": "3072",
+          "deny": "0"
+        },
+        {
+          "id": "1126252984427352184",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "3072"
+        },
+        {
+          "id": "1209541127804559451",
+          "type": 0,
+          "allow": "3072",
+          "deny": "0"
+        },
+        {
+          "id": "1167812938355187752",
+          "type": 0,
+          "allow": "3072",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "SGC | IMPORTANT",
+      "type": 4,
+      "parentId": null,
+      "permissionOverwrites": [
+        {
+          "id": "1126182951126827118",
+          "type": 0,
+          "allow": "0",
+          "deny": "2048"
+        }
+      ]
+    },
+    {
+      "name": "|------SGC CHATROOMS------|",
+      "type": 4,
+      "parentId": null,
+      "permissionOverwrites": [
+        {
+          "id": "1126421978702680095",
+          "type": 0,
+          "allow": "0",
+          "deny": "0"
+        },
+        {
+          "id": "1126208041575002173",
+          "type": 0,
+          "allow": "68608",
+          "deny": "0"
+        },
+        {
+          "id": "1126085563632590859",
+          "type": 0,
+          "allow": "68608",
+          "deny": "0"
+        },
+        {
+          "id": "1126257116445941810",
+          "type": 0,
+          "allow": "68608",
+          "deny": "0"
+        },
+        {
+          "id": "1126257371719676105",
+          "type": 0,
+          "allow": "68608",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "》Instructor",
+      "type": 2,
+      "parentId": "1126202880894959656",
+      "permissionOverwrites": [
+        {
+          "id": "1126187628530774117",
+          "type": 0,
+          "allow": "1049600",
+          "deny": "0"
+        },
+        {
+          "id": "1126105165720719420",
+          "type": 0,
+          "allow": "1049600",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "1049600"
+        }
+      ]
+    },
+    {
+      "name": "》𝒆𝒗𝒆𝒏𝒕𝒔",
+      "type": 0,
+      "parentId": "1126203667847057550",
+      "permissionOverwrites": [
+        {
+          "id": "1181302501379690547",
+          "type": 0,
+          "allow": "1025",
+          "deny": "0"
+        },
+        {
+          "id": "1188874031676534944",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1167814059857559562",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "131072",
+          "deny": "3072"
+        },
+        {
+          "id": "1188873824373047406",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1188873934402232474",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1188873535385509979",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1128009108725977129",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126105165720719420",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1210323927096762448",
+          "type": 0,
+          "allow": "3072",
+          "deny": "0"
+        },
+        {
+          "id": "1181300740677972061",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126254878767976448",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126257116445941810",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126249320757346394",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1210325594856890399",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1181306475956670474",
+          "type": 0,
+          "allow": "3072",
+          "deny": "0"
+        },
+        {
+          "id": "1188874338691199137",
+          "type": 0,
+          "allow": "3072",
+          "deny": "0"
+        },
+        {
+          "id": "1188873673059344475",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1264903215267319850",
+          "type": 1,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1214274035886592101",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126187628530774117",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126208041575002173",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1188874632481230998",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1181301335677747322",
+          "type": 0,
+          "allow": "3072",
+          "deny": "0"
+        },
+        {
+          "id": "1214271047612760095",
+          "type": 0,
+          "allow": "3072",
+          "deny": "0"
+        },
+        {
+          "id": "1188874444228272281",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1209541127804559451",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1181300252117057556",
+          "type": 0,
+          "allow": "3072",
+          "deny": "0"
+        },
+        {
+          "id": "1265672520288309361",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1167813759729942628",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1188874161976778762",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1128008872032997576",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1214271753631698964",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1184442017548349520",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1167812938355187752",
+          "type": 0,
+          "allow": "3072",
+          "deny": "0"
+        },
+        {
+          "id": "1126257371719676105",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "》𝒂𝒏𝒏𝒐𝒖𝒏𝒄𝒆𝒎𝒆𝒏𝒕𝒔",
+      "type": 0,
+      "parentId": "1126091739028013106",
+      "permissionOverwrites": [
+        {
+          "id": "1126421978702680095",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126257371719676105",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1188874031676534944",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "3136"
+        },
+        {
+          "id": "1167812938355187752",
+          "type": 0,
+          "allow": "3136",
+          "deny": "0"
+        },
+        {
+          "id": "1188873934402232474",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1128009108725977129",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1188873535385509979",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126105165720719420",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1210323927096762448",
+          "type": 0,
+          "allow": "3136",
+          "deny": "0"
+        },
+        {
+          "id": "1126176018848284673",
+          "type": 0,
+          "allow": "2112",
+          "deny": "0"
+        },
+        {
+          "id": "1126254878767976448",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126253508052668506",
+          "type": 0,
+          "allow": "0",
+          "deny": "0"
+        },
+        {
+          "id": "1181302501379690547",
+          "type": 0,
+          "allow": "3136",
+          "deny": "0"
+        },
+        {
+          "id": "1181300740677972061",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126252984427352184",
+          "type": 0,
+          "allow": "2112",
+          "deny": "0"
+        },
+        {
+          "id": "1181306475956670474",
+          "type": 0,
+          "allow": "3136",
+          "deny": "0"
+        },
+        {
+          "id": "1188874338691199137",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1188873673059344475",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1214274035886592101",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1188874632481230998",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126208041575002173",
+          "type": 0,
+          "allow": "2112",
+          "deny": "0"
+        },
+        {
+          "id": "1126187628530774117",
+          "type": 0,
+          "allow": "2112",
+          "deny": "0"
+        },
+        {
+          "id": "1181301335677747322",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1214271047612760095",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1188874444228272281",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1181300252117057556",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1265672180469862440",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1128009517033062410",
+          "type": 0,
+          "allow": "3072",
+          "deny": "0"
+        },
+        {
+          "id": "1265672520288309361",
+          "type": 0,
+          "allow": "2112",
+          "deny": "0"
+        },
+        {
+          "id": "1167813759729942628",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1188874161976778762",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126249313090154536",
+          "type": 0,
+          "allow": "2112",
+          "deny": "0"
+        },
+        {
+          "id": "1128008872032997576",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1214271753631698964",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126257116445941810",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1188873824373047406",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1167814059857559562",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "punishments-logs",
+      "type": 0,
+      "parentId": "1259522009155633222",
+      "permissionOverwrites": [
+        {
+          "id": "1126252984427352184",
+          "type": 0,
+          "allow": "3072",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "3072"
+        },
+        {
+          "id": "1126251734164066374",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126085563632590859",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126249313090154536",
+          "type": 0,
+          "allow": "3072",
+          "deny": "0"
+        },
+        {
+          "id": "1220442645503934574",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1209541127804559451",
+          "type": 0,
+          "allow": "3072",
+          "deny": "0"
+        },
+        {
+          "id": "1167812938355187752",
+          "type": 0,
+          "allow": "3072",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "》𝒎𝒐𝒅𝒆𝒓𝒂𝒕𝒐𝒓-𝒄𝒉𝒂𝒕𝒓𝒐𝒐𝒎",
+      "type": 0,
+      "parentId": "1126426585281597560",
+      "permissionOverwrites": [
+        {
+          "id": "1126208041575002173",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "1024"
+        }
+      ]
+    },
+    {
+      "name": "|------Important Info------|",
+      "type": 4,
+      "parentId": null,
+      "permissionOverwrites": [
+        {
+          "id": "1126182951126827118",
+          "type": 0,
+          "allow": "3072",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "hq-logs",
+      "type": 0,
+      "parentId": "1126426585281597560",
+      "permissionOverwrites": [
+        {
+          "id": "1126187628530774117",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1181302501379690547",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1181306475956670474",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "1024"
+        },
+        {
+          "id": "1210323927096762448",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1209541127804559451",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1167812938355187752",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "💼᲼》𝒎𝒐𝒅𝒆𝒓𝒂𝒕𝒐𝒓",
+      "type": 0,
+      "parentId": "1137733642190332004",
+      "permissionOverwrites": [
+        {
+          "id": "1126187628530774117",
+          "type": 0,
+          "allow": "68608",
+          "deny": "0"
+        },
+        {
+          "id": "1126208041575002173",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        },
+        {
+          "id": "1126251734164066374",
+          "type": 0,
+          "allow": "65536",
+          "deny": "3072"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "1024"
+        },
+        {
+          "id": "1126421978702680095",
+          "type": 0,
+          "allow": "65536",
+          "deny": "3072"
+        },
+        {
+          "id": "1128009108725977129",
+          "type": 0,
+          "allow": "65536",
+          "deny": "3072"
+        },
+        {
+          "id": "1126105165720719420",
+          "type": 0,
+          "allow": "65536",
+          "deny": "3072"
+        },
+        {
+          "id": "1126176018848284673",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126254878767976448",
+          "type": 0,
+          "allow": "65536",
+          "deny": "3072"
+        },
+        {
+          "id": "1126253508052668506",
+          "type": 0,
+          "allow": "65536",
+          "deny": "3072"
+        },
+        {
+          "id": "1126249320757346394",
+          "type": 0,
+          "allow": "66560",
+          "deny": "2048"
+        },
+        {
+          "id": "1128009517033062410",
+          "type": 0,
+          "allow": "65536",
+          "deny": "3072"
+        },
+        {
+          "id": "1012211131248549918",
+          "type": 1,
+          "allow": "268435472",
+          "deny": "0"
+        },
+        {
+          "id": "1126252984427352184",
+          "type": 0,
+          "allow": "65536",
+          "deny": "3072"
+        },
+        {
+          "id": "1126085563632590859",
+          "type": 0,
+          "allow": "65536",
+          "deny": "3072"
+        },
+        {
+          "id": "1126249313090154536",
+          "type": 0,
+          "allow": "65536",
+          "deny": "3072"
+        },
+        {
+          "id": "1128008872032997576",
+          "type": 0,
+          "allow": "65536",
+          "deny": "3072"
+        },
+        {
+          "id": "1126257116445941810",
+          "type": 0,
+          "allow": "65536",
+          "deny": "3072"
+        },
+        {
+          "id": "1126257371719676105",
+          "type": 0,
+          "allow": "65536",
+          "deny": "3072"
+        }
+      ]
+    },
+    {
+      "name": "🔔》𝒅𝒆𝒗𝒆𝒍𝒐𝒑𝒎𝒆𝒏𝒕-𝒏𝒐𝒕𝒊𝒇𝒊𝒄𝒂𝒕𝒊𝒐𝒏𝒔",
+      "type": 5,
+      "parentId": "1126203667847057550",
+      "permissionOverwrites": [
+        {
+          "id": "1126187628530774117",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1128009517033062410",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1181306475956670474",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "2112"
+        },
+        {
+          "id": "1126182951126827118",
+          "type": 0,
+          "allow": "0",
+          "deny": "2048"
+        },
+        {
+          "id": "1188874444228272281",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1126176018848284673",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        },
+        {
+          "id": "1167812938355187752",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "💭》𝒈𝒆𝒏𝒆𝒓𝒂𝒍",
+      "type": 0,
+      "parentId": "1126091739028013106",
+      "permissionOverwrites": [
+        {
+          "id": "1126187628530774117",
+          "type": 0,
+          "allow": "128637021454161",
+          "deny": "4563402752"
+        },
+        {
+          "id": "1126208041575002173",
+          "type": 0,
+          "allow": "128619279548225",
+          "deny": "0"
+        },
+        {
+          "id": "1126251734164066374",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "1024",
+          "deny": "131072"
+        },
+        {
+          "id": "1126421978702680095",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1128009108725977129",
+          "type": 0,
+          "allow": "203777",
+          "deny": "0"
+        },
+        {
+          "id": "1206671383086637160",
+          "type": 0,
+          "allow": "1",
+          "deny": "0"
+        },
+        {
+          "id": "1126105165720719420",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126253508052668506",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126254878767976448",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126176018848284673",
+          "type": 0,
+          "allow": "378762751057",
+          "deny": "0"
+        },
+        {
+          "id": "1126249320757346394",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1128009517033062410",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126252984427352184",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1308489825606828148",
+          "type": 0,
+          "allow": "0",
+          "deny": "3072"
+        },
+        {
+          "id": "1128718016650158153",
+          "type": 0,
+          "allow": "131072",
+          "deny": "0"
+        },
+        {
+          "id": "1220440889269420084",
+          "type": 0,
+          "allow": "0",
+          "deny": "131072"
+        },
+        {
+          "id": "1126085563632590859",
+          "type": 0,
+          "allow": "68608",
+          "deny": "0"
+        },
+        {
+          "id": "1126249313090154536",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1128008872032997576",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "1126257116445941810",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        },
+        {
+          "id": "508968886998269962",
+          "type": 1,
+          "allow": "0",
+          "deny": "2048"
+        },
+        {
+          "id": "1126257371719676105",
+          "type": 0,
+          "allow": "199681",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "💤》𝑨𝑭𝑲",
+      "type": 2,
+      "parentId": "1126202880894959656",
+      "permissionOverwrites": []
+    },
+    {
+      "name": "|—————Chat & Logs—————|",
+      "type": 4,
+      "parentId": null,
+      "permissionOverwrites": [
+        {
+          "id": "1181302501379690547",
+          "type": 0,
+          "allow": "1049600",
+          "deny": "0"
+        },
+        {
+          "id": "1126252984427352184",
+          "type": 0,
+          "allow": "1049600",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "1049600"
+        },
+        {
+          "id": "1126251734164066374",
+          "type": 0,
+          "allow": "1049600",
+          "deny": "0"
+        },
+        {
+          "id": "1126249313090154536",
+          "type": 0,
+          "allow": "1049600",
+          "deny": "0"
+        },
+        {
+          "id": "1209541127804559451",
+          "type": 0,
+          "allow": "1049600",
+          "deny": "0"
+        },
+        {
+          "id": "1167812938355187752",
+          "type": 0,
+          "allow": "1049600",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "rowifi-logs",
+      "type": 0,
+      "parentId": "1126426585281597560",
+      "permissionOverwrites": [
+        {
+          "id": "1181306475956670474",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "1024"
+        },
+        {
+          "id": "1126249320757346394",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1184442017548349520",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        },
+        {
+          "id": "1209541127804559451",
+          "type": 0,
+          "allow": "1024",
+          "deny": "0"
+        }
+      ]
+    },
+    {
+      "name": "》𝒆𝒗𝒆𝒏𝒕-𝒍𝒐𝒈𝒔",
+      "type": 5,
+      "parentId": "1126203667847057550",
+      "permissionOverwrites": [
+        {
+          "id": "1126187628530774117",
+          "type": 0,
+          "allow": "70835553958993",
+          "deny": "0"
+        },
+        {
+          "id": "1126208041575002173",
+          "type": 0,
+          "allow": "70834748652609",
+          "deny": "805306384"
+        },
+        {
+          "id": "1126257371719676105",
+          "type": 0,
+          "allow": "70834748652609",
+          "deny": "805306384"
+        },
+        {
+          "id": "1126077426234048553",
+          "type": 0,
+          "allow": "0",
+          "deny": "3072"
+        },
+        {
+          "id": "1181302501379690547",
+          "type": 0,
+          "allow": "3072",
+          "deny": "0"
+        },
+        {
+          "id": "1181301335677747322",
+          "type": 0,
+          "allow": "3072",
+          "deny": "0"
+        },
+        {
+          "id": "1181300740677972061",
+          "type": 0,
+          "allow": "3072",
+          "deny": "0"
+        },
+        {
+          "id": "1126105165720719420",
+          "type": 0,
+          "allow": "70832601168961",
+          "deny": "2952790032"
+        },
+        {
+          "id": "1126176018848284673",
+          "type": 0,
+          "allow": "70835553958993",
+          "deny": "0"
+        },
+        {
+          "id": "1181300252117057556",
+          "type": 0,
+          "allow": "3072",
+          "deny": "0"
+        },
+        {
+          "id": "1128009517033062410",
+          "type": 0,
+          "allow": "1025",
+          "deny": "0"
+        },
+        {
+          "id": "1181306475956670474",
+          "type": 0,
+          "allow": "3072",
+          "deny": "0"
+        },
+        {
+          "id": "1126085563632590859",
+          "type": 0,
+          "allow": "0",
+          "deny": "0"
+        },
+        {
+          "id": "1126257116445941810",
+          "type": 0,
+          "allow": "70834748652609",
+          "deny": "805306384"
+        },
+        {
+          "id": "1167812938355187752",
+          "type": 0,
+          "allow": "3072",
+          "deny": "0"
+        },
+        {
+          "id": "1167814059857559562",
+          "type": 0,
+          "allow": "2048",
+          "deny": "0"
+        }
+      ]
+    }
+  ]
+}
