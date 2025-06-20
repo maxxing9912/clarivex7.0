@@ -27,10 +27,10 @@ module.exports = {
 
         // Extract guildId from customId = "confirm_join_<guildId>"
         const parts = interaction.customId.split('_');
-        const guildId = parts.slice(2).join('_');
+        let guildId = parts.slice(2).join('_');
         console.log(`[ConfirmJoin] Button clicked: customId="${interaction.customId}", extracted guildId="${guildId}", interaction.guildId="${interaction.guildId}"`);
 
-        // --- 1) Check pending setup ---
+        // Try to fetch pendingSetup under extracted guildId
         let pendingSetup;
         try {
             pendingSetup = await setupManager.getPendingSetup(guildId);
@@ -41,6 +41,21 @@ module.exports = {
             });
         }
         console.log('[ConfirmJoin] pendingSetup:', pendingSetup);
+
+        // If no pendingSetup under extracted guildId but extracted != actual guildId, try fallback
+        if (!pendingSetup && guildId !== interaction.guildId) {
+            console.warn(`[ConfirmJoin] No pendingSetup for extracted guildId="${guildId}". Trying fallback guildId="${interaction.guildId}".`);
+            try {
+                const fallback = await setupManager.getPendingSetup(interaction.guildId);
+                if (fallback) {
+                    console.log('[ConfirmJoin] Found pendingSetup under interaction.guildId as fallback.');
+                    pendingSetup = fallback;
+                    guildId = interaction.guildId;
+                }
+            } catch (err) {
+                console.error('[ConfirmJoin] Error in fallback getPendingSetup:', err);
+            }
+        }
 
         if (pendingSetup) {
             // Adapt these property names to what you actually saved in setupManager.setPendingSetup:
